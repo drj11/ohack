@@ -59,4 +59,4 @@ typedef	xchar	boolean;		/* 0 or 1 */
  */
 #define	Bitfield(x,n)	unsigned x:n
 
-#endif CONFIG
+#endif

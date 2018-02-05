@@ -14,13 +14,13 @@ extern char nul[];
 
 extern struct wseg *wsegs[32], *wheads[32];
 extern long wgrowtime[32];
-#endif NOWORM
+#endif
 
 savelev(fd){
 #ifndef NOWORM
 	register struct wseg *wtmp, *wtmp2;
 	register int tmp;
-#endif NOWORM
+#endif
 
 	if(fd < 0)
            panic("Save on bad file!");
@@ -41,7 +41,7 @@ savelev(fd){
 #ifndef QUEST
 	bwrite(fd,(char *) rooms,sizeof(rooms));
 	bwrite(fd,(char *) doors,sizeof(doors));
-#endif QUEST
+#endif
 	save_engravings(fd);
 /* 	if (!ismklev) */
 	   {
@@ -61,7 +61,7 @@ savelev(fd){
 		   wsegs[tmp] = 0;
 	}
 	bwrite(fd,(char *) wgrowtime,sizeof(wgrowtime));
-#endif NOWORM
+#endif
 /*--------------------------------------------------------------------*/
 }
 

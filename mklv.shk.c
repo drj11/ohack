@@ -24,7 +24,7 @@ register struct monst *shk;
 		if(
 #ifdef WIZARD
 		   wizard ||
-#endif WIZARD
+#endif
 			sroom->doorct == 1) break;
 	}
 #ifdef WIZARD
@@ -42,12 +42,12 @@ register struct monst *shk;
 			goto gotlet;
 		}
 	}
-#endif WIZARD
+#endif
 	for(i = rn2(100),let = 0; (i -= shprobs[let])>= 0; let++)
 		if(!shtypes[let]) break;	/* superfluous */
 #ifdef WIZARD
 gotlet:
-#endif WIZARD
+#endif
 	sroom->rtype = 8+let;
 	let = shtypes[let];
 	sh = sroom->fdoor;
@@ -90,7 +90,7 @@ gotlet:
 	}
 #ifdef WIZARD
 	if(wizard) printf("I made a %c-shop.", let ? let : 'g');
-#endif WIZARD
+#endif
 }
 
 mkzoo(){
@@ -121,7 +121,7 @@ int goldlim = 500 * dlevel;
 	}
 #ifdef WIZARD
 	if(wizard) printf("I made a zoo.");
-#endif WIZARD
+#endif
 }
 
 dist2(x0,y0,x1,y1){
@@ -131,4 +131,4 @@ dist2(x0,y0,x1,y1){
 sq(a) int a; {
 	return(a*a);
 }
-#endif QUEST
+#endif

@@ -609,13 +609,13 @@ int info[9];
 #else
 		if((!appr && !rn2(++chcnt)) ||
 		   (appr && GDIST(nx,ny) < GDIST(nix,niy))){
-#endif STUPID
+#endif
 			nix = nx;
 			niy = ny;
 			chi = i;
 #ifdef STUPID
 		   }
-#endif STUPID
+#endif
 		}
 	}
 	if(nix != omx || niy != omy){
@@ -635,7 +635,7 @@ int info[9];
 	}
  return(0);
 }
-#endif QUEST
+#endif
 
 char *
 plur(n) unsigned n; {

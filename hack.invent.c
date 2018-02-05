@@ -8,7 +8,7 @@ extern char morc;
 #include	"def.wseg.h"
 
 extern struct wseg *wsegs[32];
-#endif NOWORM
+#endif
 
 struct obj *
 addinv(obj) register struct obj *obj; {
@@ -103,7 +103,7 @@ register x,y;
 	register struct monst *mtmp;
 #ifndef NOWORM
 	register struct wseg *wtmp;
-#endif NOWORM
+#endif
 
 	m_atseg = 0;
 	for(mtmp = fmon; mtmp; mtmp = mtmp->nmon){
@@ -117,7 +117,7 @@ register x,y;
 			return(mtmp);
 		    }
 		}
- #endif NOWORM
+ #endif
 	}
  return(0);
 }

@@ -24,7 +24,7 @@ struct trobj Extra_objs[] = {
 	{ 0, 0, 0, 0, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
-#endif WIZARD
+#endif
 
 struct trobj Cave_man[] = {
 	{ MACE, 1, WEAPON_SYM, 1, 1 },
@@ -82,7 +82,7 @@ u_in_intrup(){
 	u_in_infl++;
 	(void) signal(SIGINT, u_in_intrup);
 }
-#endif NEWS
+#endif
 
 u_init(){
 register int c,pc,i;
@@ -91,7 +91,7 @@ register int c,pc,i;
 	   intended to kill the news; unfortunately this would
 	   also kill (part of) the following question */
 int (*prevsig)() = signal(SIGINT, u_in_intrup);
-#endif NEWS
+#endif
 register char *cp;
 char buf[256];
 	if(pc = pl_character[0]) goto got_suffix;
@@ -106,7 +106,7 @@ intrup:
 			u_in_infl = 0;
 			goto intrup;
 		}
-#endif NEWS
+#endif
 		(void) putchar(*cp);
 	}
 loop:
@@ -116,7 +116,7 @@ loop:
 		if(c == EOF) {
 #ifdef NEWS
 			if(u_in_infl) goto intrup;	/* %% */
-#endif NEWS
+#endif
 			settty("\nEnd of input?\n");
 			exit(0);
 		}
@@ -131,7 +131,7 @@ got_suffix:
 
 #ifdef NEWS
 	(void) signal(SIGINT,prevsig);
-#endif NEWS
+#endif
 
 	u.usym = '@';
 	u.ulevel = 1;
@@ -140,7 +140,7 @@ got_suffix:
 	u.ustrmax = u.ustr = !rn2(20) ? 14 + rn2(7) : 16;
 #ifdef QUEST
 	u.uhorizon = 6;
-#endif QUEST
+#endif
 	switch(pc) {
 	case 'C':
 		setpl_char("Cave-man");
@@ -191,7 +191,7 @@ got_suffix:
 		u.ustr++, u.ustrmax++;
 #ifdef WIZARD
 	if(wizard) wiz_inv();
-#endif WIZARD
+#endif
 }
 
 ini_inv(trop) register struct trobj *trop; {
@@ -263,7 +263,7 @@ register int type;
 	trop->trquan = 1;
 	ini_inv(trop);
 }
-#endif WIZARD
+#endif
 
 setpl_char(plc) char *plc; {
 	(void) strncpy(pl_character, plc, PL_CSIZ-1);

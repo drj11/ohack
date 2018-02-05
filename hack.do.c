@@ -311,7 +311,7 @@ register char *cmd;
 			u.ux0 = u.ux + u.dx;
 			u.uy0 = u.uy + u.dy;
 		}
-#endif QUEST
+#endif
 		domove();
 		return;
 	}
@@ -341,7 +341,7 @@ register char *cmd;
 		if(cmd[2] == '-') flags.run += 1;
 		goto rush;
 	}
-#endif QUEST
+#endif
 	while(tlist->f_char) {
 		if(*cmd == tlist->f_char){
 			res = (*(tlist->f_funct))(0);
@@ -385,13 +385,13 @@ register char *str;
 	}
  return(0);
 }
-#endif SHELL
+#endif
 
 #ifdef BSD
 #include	<sys/wait.h>
 #else
 #include	<wait.h>
-#endif BSD
+#endif
 
 child(wt) {
 register int f = fork();
@@ -412,7 +412,7 @@ register int f = fork();
 	(void) signal(SIGINT,done1);
 #ifdef WIZARD
 	if(wizard) (void) signal(SIGQUIT,SIG_DFL);
-#endif WIZARD
+#endif
 	if(wt) getret();
 	docrt();
 	return(0);
@@ -546,7 +546,7 @@ register boolean at_stairs;
 	(void) inshop();
 #ifdef TRACK
 	initrack();
-#endif TRACK
+#endif
 
 	losedogs();
 	flags.nscrinh = 0;
@@ -628,7 +628,7 @@ dothrow()
 				  /* mon still alive */
 #ifndef NOWORM
 				  cutworm(mon,bhitpos.x,bhitpos.y,obj->otyp);
-#endif NOWORM
+#endif
 				} else mon = 0;
 				/* weapons thrown disappear sometimes */
 				if(obj->otyp < BOOMERANG && rn2(3)) {

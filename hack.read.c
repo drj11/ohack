@@ -224,7 +224,7 @@ doread() {
 			register int uroom = inroom(u.ux, u.uy);
 			tele();
 			if(uroom != inroom(u.ux, u.uy)) known = TRUE;
-#endif QUEST
+#endif
 		}
 		break;
 	case SCR_GOLD_DETECTION:
@@ -329,7 +329,7 @@ doread() {
 				} else if(lev->seen) continue;
 #ifndef QUEST
 				if(num != ROOM)
-#endif QUEST
+#endif
 				{
 				  lev->seen = lev->new = 1;
 				  if(lev->scrsym == ' ')
@@ -450,7 +450,7 @@ register boolean on;
 		    return;
 		} else
 		    pline("The room is lit.");
-#endif QUEST
+#endif
 	}
 
 do_it:
@@ -485,5 +485,5 @@ do_it:
 				if(on) prl(zx,zy); else nosee(zx,zy);
 		}
 	if(!on) seehx = 0;
-#endif	QUEST
+#endif
 }

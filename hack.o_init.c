@@ -42,7 +42,7 @@ register char let, *tmp;
 			for(j = first; j < LAST_GEM; j++)
 			    objects[j].oc_prob = (20+j-first)/(LAST_GEM-first);
 		}
-#endif MKLEV
+#endif
 		sum = 0;
 		for(j = first; j < last; j++) sum += objects[j].oc_prob;
 		if(sum == 0) {
@@ -55,7 +55,7 @@ register char let, *tmp;
 			panic
 #else
 			error
-#endif MKLEV
+#endif
 				("init-prob error for %c", let);
 		/* shuffling is rather meaningless in mklev, 
 		   but we must update  last  anyway */
@@ -116,4 +116,4 @@ unsigned len;
 		mread(fd, objects[i].oc_uname, len);
 	}
 }
-#endif MKLEV
+#endif

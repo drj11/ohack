@@ -32,7 +32,7 @@ unsee() {
 	if(seehx){
 		seehx = 0;
 	} else
-#endif QUEST
+#endif
 	for(x = u.ux-1; x < u.ux+2; x++)
 	  for(y = u.uy-1; y < u.uy+2; y++) {
 		lev = &levl[x][y];
@@ -65,7 +65,7 @@ seeoff(mode)	/* 1 to redo @, 0 to leave them */
 	if(seehx) {
 		seehx = 0;
 	} else
-#endif QUEST
+#endif
 	if(!mode) {
 		for(x = u.ux-1; x < u.ux+2; x++)
 			for(y = u.uy-1; y < u.uy+2; y++) {
@@ -145,7 +145,7 @@ isroom(x,y)  register x,y; {
 	return(isok(x,y) && (levl[x][y].typ == ROOM ||
 				(levl[x][y].typ >= LDOOR && flags.run >= 6)));
 }
-#endif QUEST
+#endif
 
 isok(x,y) register x,y; {
 	return(x >= 0 && x <= COLNO-1 && y >= 0 && y <= ROWNO-1);
@@ -280,7 +280,7 @@ domove()
 				if(mtmp->wormno)
 					cutworm(mtmp, u.ux+u.dx, u.uy+u.dy,
 						uwep ? uwep->otyp : 0);
-#endif NOWORM
+#endif
 			}
 			if(mdat->mlet == 'a') {
 				if(rn2(2)) {
@@ -442,7 +442,7 @@ nomon:
 			}
  nose1(oldx-u.dx,oldy-u.dy);
 		}
- #endif QUEST
+ #endif
 	} else {
  pru();
 	}
@@ -590,12 +590,12 @@ register struct monst *mtmp;
 #ifdef lint
 	/* suppress "used before set" message */
 	x0 = y0 = 0;
-#endif lint
+#endif
 	if(Blind || flags.run == 0) return;
 	if(flags.run == 1 && levl[u.ux][u.uy].typ >= ROOM) return;
 #ifdef QUEST
 	if(u.ux0 == u.ux+u.dx && u.uy0 == u.uy+u.dy) goto stop;
-#endif QUEST
+#endif
 	for(x = u.ux-1; x <= u.ux+1; x++) for(y = u.uy-1; y <= u.uy+1; y++){
 		if(x == u.ux && y == u.uy) continue;
 		if(!levl[x][y].typ) continue;
@@ -645,7 +645,7 @@ register struct monst *mtmp;
 	}
 #ifdef QUEST
 	if(corrct > 0 && (flags.run == 4 || flags.run == 5)) goto stop;
-#endif QUEST
+#endif
 	if(corrct > 1 && flags.run == 2) goto stop;
 	if((flags.run == 1 || flags.run == 3) && !noturn && !m0 && i0 &&
 		(corrct == 1 || (corrct == 2 && i0 == 1))) {
@@ -724,7 +724,7 @@ cansee(x,y) xchar x,y; {
 		y <= seehy) return(1);
 	return(0);
 }
-#endif QUEST
+#endif
 
 sgn(a) register int a; {
 	return((a> 0) ? 1 : (a == 0) ? 0 : -1);
@@ -785,7 +785,7 @@ setsee()
 	    if(seehx == u.ux) for(y = u.uy-1; y <= u.uy+1; y++) prl(seehx+1,y);
 	}
 }
-#endif QUEST
+#endif
 
 nomul(nval)
 register nval;

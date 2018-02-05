@@ -75,7 +75,7 @@ dozap()
 			case WAN_PROBING:
 				mstatusline(mtmp);
 				break;
-#endif WAN_PROBING
+#endif
 			default:
 				pline("What an interesting wand (%d)",
 					obj->otyp);

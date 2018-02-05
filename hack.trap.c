@@ -314,7 +314,7 @@ dotele() {
 	if(
 #ifdef WIZARD
 	   !wizard &&
-#endif WIZARD
+#endif
 		      (!Teleportation || u.ulevel < 6 ||
 			(pl_character[0] != 'W' && u.ulevel < 10))) {
 		pline("You are not able to teleport at will.");

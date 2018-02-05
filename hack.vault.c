@@ -212,4 +212,4 @@ gddead(){
 }
 
 
-#endif QUEST
+#endif

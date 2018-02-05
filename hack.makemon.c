@@ -7,7 +7,7 @@ extern char *fut_geno;
 #else MKLEV
 #include	"hack.h"
 extern char fut_geno[];
-#endif MKLEV
+#endif
 
 
 extern char *index();
@@ -58,7 +58,7 @@ gotmon:
 	fmon = mtmp;
 #ifndef MKLEV
 	mtmp->m_id = flags.ident++;
-#endif MKLEV
+#endif
 	mtmp->data = ptr;
 	mtmp->mxlth = ptr->pxlth;
 	if(ptr->mlet == 'D') mtmp->orig_hp = mtmp->mhp = 80;
@@ -74,33 +74,33 @@ gotmon:
 		mnexto(mtmp);
 	if(x == 0 && y == 0)
 		rloc(mtmp);
-#endif MKLEV
+#endif
 	if(ptr->mlet == 's' || ptr->mlet == 'S') {
 		mtmp->mhide = mtmp->mundetected = 1;
 #ifdef MKLEV
 		if(mtmp->mx && mtmp->my)
 			mkobj_at(0, mtmp->mx, mtmp->my);
-#endif MKLEV
+#endif
 	}
 	if(ptr->mlet == ':') {
 		mtmp->cham = 1;
 #ifndef MKLEV
 		(void) newcham(mtmp, &mons[dlevel+14+rn2(CMNUM-14-dlevel)]);
-#endif MKLEV
+#endif
 	}
 	if(ptr->mlet == 'I') mtmp->minvis = 1;
 	if(ptr->mlet == 'L' || ptr->mlet == 'N'
 #ifdef MKLEV
 		|| (ptr->mlet != '&' && ptr->mlet != 'w' && rn2(5))
-#endif MKLEV
+#endif
 	) mtmp->msleep = 1;
 
 #ifndef NOWORM
 #ifndef MKLEV
 	if(ptr->mlet == 'w' && getwn(mtmp))
 		initworm(mtmp);
-#endif MKLEV
-#endif NOWORM
+#endif
+#endif
 
 	if(anything) if(ptr->mlet == 'O' || ptr->mlet == 'k') {
 		coord enexto();
@@ -166,6 +166,6 @@ goodpos(x,y)	/* used only in mnexto and rloc */
 #ifndef MKLEV
 	   || (x == u.ux && y == u.uy)
 	   || sobj_at(ENORMOUS_ROCK, x, y)
-#endif MKLEV
+#endif
 	));
 }

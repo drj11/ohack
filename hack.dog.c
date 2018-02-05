@@ -178,7 +178,7 @@ int info[9];
 	gtyp = UNDEF;	/* no goal as yet */
 #ifdef LINT
 	gx = gy = 0;
-#endif LINT
+#endif
 	for(obj = fobj; obj; obj = obj->nobj) {
 		otyp = dogfood(obj);
 		if(otyp > gtyp || otyp == UNDEF) continue;
@@ -224,7 +224,7 @@ int info[9];
 				gx = u.ux;
 				gy = u.uy;
 			}
- #endif QUEST
+ #endif
 		}
 		appr = (udist >= 9) ? 1 : (mtmp->mflee) ? -1 : 0;
 		if(after && udist <= 4 && gx == u.ux && gy == u.uy)
@@ -258,7 +258,7 @@ int info[9];
 			gy = cp->y;
 		}
 	}
-#endif TRACK
+#endif
 	nix = omx;
 	niy = omy;
 	cnt = mfndpos(mtmp,poss,info,ALLOW_M | ALLOW_TRAPS);
@@ -368,7 +368,7 @@ inroom(x,y) xchar x,y; {
 			return(croom - rooms);
 		croom++;
 	}
-#endif QUEST
+#endif
 	return(-1);	/* not in room or on door */
 }
 
@@ -380,7 +380,7 @@ register struct monst *mtmp2;
 	if(mtmp->mtame || mtmp->mfroz ||
 #ifndef NOWORM
 		mtmp->wormno ||
-#endif NOWORM
+#endif
 		mtmp->isshk || mtmp->isgd)
 		return(0); /* no tame long worms? */
 	if(obj) {

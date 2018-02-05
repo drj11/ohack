@@ -283,7 +283,7 @@ register struct monst *mtmp;
 		    }
 		}
 	}
-#endif TRACK
+#endif
 	/* look for gold or jewels nearby */
 	likegold = (index("LOD", mtmp->data->mlet) != NULL);
 	likegems = (index("ODu", mtmp->data->mlet) != NULL);
@@ -342,7 +342,7 @@ register struct monst *mtmp;
 		}
 #else
 		nearer = (DIST(nx,ny,gx,gy) < DIST(nix,niy,gx,gy));
-#endif STUPID
+#endif
 		if((appr == 1 && nearer) || (appr == -1 && !nearer) ||
 			!mmoved ||
 			(!appr && !rn2(++chcnt))){
@@ -371,7 +371,7 @@ register struct monst *mtmp;
 		mtmp->mtrack[0].y = omy;
 #ifndef NOWORM
 		if(mtmp->wormno) worm_move(mtmp);
-#endif NOWORM
+#endif
 	} else {
 		if(mtmp->data->mlet == 'u' && rn2(2)){
 			rloc(mtmp);
@@ -379,7 +379,7 @@ register struct monst *mtmp;
 		}
 #ifndef NOWORM
 		if(mtmp->wormno) worm_nomove(mtmp);
-#endif NOWORM
+#endif
 	}
 postmov:
 	if(mmoved == 1) {
@@ -529,7 +529,7 @@ register struct monst *mtmp;
 	if(mtmp->isgd) gddead();
 #ifndef NOWORM
 	if(mtmp->wormno) wormdead(mtmp);
-#endif NOWORM
+#endif
 	monfree(mtmp);
 }
 
@@ -575,7 +575,7 @@ register struct monst *mtmp;
 killed(mtmp) struct monst *mtmp; {
 #ifdef lint
 #define	NEW_SCORING
-#endif lint
+#endif
 register int tmp,tmp2,nk,x,y;
 register struct permonst *mdat = mtmp->data;
 	if(mtmp->cham) mdat = PM_CHAM;
@@ -632,7 +632,7 @@ register struct permonst *mdat = mtmp->data;
 	}
 	/* note: ul is not necessarily the future value of u.ulevel */
 	/* ------- end of recent valuation change ------- */
-#endif NEW_SCORING
+#endif
 
 	u.uexp += tmp;
 	u.urexp += 4*tmp;
@@ -661,7 +661,7 @@ register struct permonst *mdat = mtmp->data;
 		mksobj_at(WEAPON_SYM, WORM_TOOTH, x, y);
 		stackobj(fobj);
 	} else
-#endif	NOWORM
+#endif
 	if(!letter(tmp) || !rn2(3)) tmp = 0;
 
 	if(levl[x][y].typ >= DOOR)	/* might be mimic in wall */
@@ -703,7 +703,7 @@ register struct permonst *mdat;
 	if(mdat == mtmp->data) return(0);	/* still the same monster */
 #ifndef NOWORM
 	if(mtmp->wormno) wormdead(mtmp);	/* throw tail away */
-#endif NOWORM
+#endif
 	hpn = mtmp->mhp;
 	hpd = (mtmp->data->mlevel)*8;
 	if(!hpd) hpd = 4;
@@ -717,7 +717,7 @@ register struct permonst *mdat;
 #ifndef NOWORM
 	if(mdat->mlet == 'w' && getwn(mtmp)) initworm(mtmp);
 			/* perhaps we should clear mtmp->mtame here? */
-#endif NOWORM
+#endif
 	unpmon(mtmp);	/* necessary for 'I' and to force pmon */
 	pmon(mtmp);
 	return(1);
@@ -742,7 +742,7 @@ struct monst *mtmp;
 
 #ifndef NOWORM
 	if(ch == 'w' && mtmp->mx) return;	/* do not relocate worms */
-#endif NOWORM
+#endif
 	do {
 		tx = rn1(COLNO-3,2);
 		ty = rn2(ROWNO);

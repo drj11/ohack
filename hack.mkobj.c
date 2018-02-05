@@ -5,7 +5,7 @@
 #include "mklev.h"
 #else
 #include "hack.h"
-#endif MKLEV
+#endif
 
 #include "hack.onames.h"
 
@@ -53,7 +53,7 @@ mksobj(let, otyp) {
 #else
 	otmp->age = moves;
 	otmp->o_id = flags.ident++;
-#endif MKLEV
+#endif
 	otmp->quan = 1;
 	if(letter(let)){
 		otmp->olet = FOOD_SYM;
@@ -147,6 +147,6 @@ register num;
 		fgold = gtmp;
 #ifdef MKLEV
 		levl[x][y].scrsym = '$';
-#endif MKLEV
+#endif
 	}
 }

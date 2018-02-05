@@ -6,7 +6,7 @@
 #include	"mklev.h"
 #else
 #include	"hack.h"
-#endif MKLEV
+#endif
 
 extern char *nomovemsg;
 extern char nul[];
@@ -97,7 +97,7 @@ register struct engr *ep = engr_at(x,y);
 	    pline("You read: \"%s\".", ep->engr_txt);
 	}
 }
-#endif MKLEV
+#endif
 
 #ifdef MKLEV
 make_engr_at(x,y,s)
@@ -120,7 +120,7 @@ register char *s;
 	ep->engr_type = DUST;
 	ep->engr_lth = strlen(s) + 1;
 }
-#endif MKLEV
+#endif
 
 #ifndef MKLEV
 doengrave(){
@@ -241,7 +241,7 @@ register struct obj *otmp;
 
 	return(1);
 }
-#endif MKLEV
+#endif
 
 save_engravings(fd) int fd; {
 register struct engr *ep = head_engr;
@@ -272,7 +272,7 @@ unsigned lth;
 		head_engr = ep;
 	}
 }
-#endif MKLEV
+#endif
 
 del_engr(ep) register struct engr *ep; {
 register struct engr *ept;
@@ -286,7 +286,7 @@ register struct engr *ept;
 			}
 #ifndef MKLEV
 		pline("Error in del_engr?"); impossible();
-#endif MKLEV
+#endif
 	fnd:	;
 	}
  free((char *) ep);

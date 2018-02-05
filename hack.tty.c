@@ -87,7 +87,7 @@ register n;
 		curttyb.sg_flags &= ~CBREAK;
 	setctty();
 }
-#endif LONG_CMD
+#endif
 
 getlin(bufp)
 register char *bufp;
@@ -186,7 +186,7 @@ parse()
 		inline[1] = getchar();
 #ifdef QUEST
 		if(inline[1] == foo) inline[2] = getchar(); else
-#endif QUEST
+#endif
 		inline[2] = 0;
 	}
 	if(foo == 'm' || foo == 'M'){

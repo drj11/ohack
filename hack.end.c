@@ -69,7 +69,7 @@ register char *st1;
 		flags.botl = 1;
 		return;
 	}
-#endif WIZARD
+#endif
 	(void) signal(SIGINT, done_intr);
 	if(*st1 == 'q' && u.uhp < 1){
 		st1 = "died";
@@ -164,7 +164,7 @@ register char *st1;
 	}
 #ifdef WIZARD
 	if(!wizard)
-#endif WIZARD
+#endif
 		topten();
 	if(done_stopprint) printf("\n\n");
 	exit(0);
@@ -412,7 +412,7 @@ hangup(){
 	clearlocks();
 	exit(1);
 }
-#endif NOSAVEONHANGUP
+#endif
 
 char *
 eos(s) register char *s; {

@@ -146,7 +146,7 @@ char ch;
 	/* if xchar is unsigned, lint will complain about  if(x < 0)  */
 	if(x < 0 || x > COLNO-1 || y < 0 || y > ROWNO-1)
 		panic("At gets 0%o at %d %d(%d %d)",ch,x,y,u.ux,u.uy);
-#endif lint
+#endif
 	if(!ch) {
 		home();
 		printf("At gets null at %2d %2d.",x,y);
@@ -240,7 +240,7 @@ pru()
 #ifndef NOWORM
 #include	"def.wseg.h"
 extern struct wseg *m_atseg;
-#endif NOWORM
+#endif
 
 /* print a position that is visible for @ */
 prl(x,y)
@@ -262,7 +262,7 @@ prl(x,y)
 		if(m_atseg)
 			pwseg(m_atseg);
 		else
-#endif NOWORM
+#endif
 		pmon(mtmp);
 	}
 	else if(otmp = o_at(x,y))
@@ -406,7 +406,7 @@ register x,y;
 		nosee(x+1,y);
 	}
 }
-#endif QUEST
+#endif
 
 vism_at(x,y) register x,y; {
 register struct monst *mtmp;
@@ -435,7 +435,7 @@ register int show = (!obj->oinvis || See_invisible) &&
 		obj->ody = obj->oy;
 	}
 }
-#endif NEWSCR
+#endif
 
 unpobj(obj) register struct obj *obj; {
 /* 	if(obj->odispl){
@@ -470,7 +470,7 @@ register struct monst *mtmp;
 		pmon(mtmp);
 #ifndef NOWORM
 		if(mtmp->wormno) wormsee(mtmp->wormno);
-#endif NOWORM
+#endif
 	}
 }
 
@@ -567,7 +567,7 @@ mstatusline(mtmp) register struct monst *mtmp; {
 	    mtmp->data->mlevel, mtmp->mgold, mtmp->mhp, mtmp->orig_hp,
 	    mtmp->data->ac, (mtmp->data->damn + 1) * (mtmp->data->damd + 1));
 }
-#endif WAN_PROBING
+#endif
 
 cls(){
 	if(flags.topl == 1)

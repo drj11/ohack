@@ -97,12 +97,12 @@ char *argv[];
 				wizard = TRUE;
 			else printf("Sorry.\n");
 			break;
-#endif WIZARD
+#endif
 #ifdef NEWS
 		case 'n':
 			flags.nonews = TRUE;
 			break;
-#endif NEWS
+#endif
 		case 'u':
 			if(argv[0][2])
 			  (void) strncpy(plname, argv[0]+2, sizeof(plname)-1);
@@ -124,7 +124,7 @@ char *argv[];
 		catmore = argv[2];
 #ifdef WIZARD
 	if(wizard) (void) strcpy(plname, "wizard"); else
-#endif WIZARD
+#endif
 	if(!*plname || !strncmp(plname, "player", 4)) askname();
 	plnamesuffix();		/* strip suffix from name */
 
@@ -135,7 +135,7 @@ char *argv[];
 	(void) signal(SIGHUP, hangup);
 #ifdef WIZARD
 	if(!wizard) {
-#endif WIZARD
+#endif
 		(void) signal(SIGQUIT,SIG_IGN);
 		(void) signal(SIGINT,SIG_IGN);
 		if(locknum)
@@ -171,7 +171,7 @@ char *argv[];
 			(void) strcpy(fut_geno, genocided);
 		}
 	}
-#endif WIZARD
+#endif
 	u.uhp = 1;	/* prevent RIP on early quits */
 	u.ux = FAR;	/* prevent nscr() */
 	(void) strcat(SAVEF,plname);
@@ -187,7 +187,7 @@ char *argv[];
 		if(!flags.nonews)
 			if((fd = open(NEWS,0)) >= 0)
 				outnews(fd);
-#endif NEWS
+#endif
 		flags.ident = 1;
 		init_objects();
 		u_init();
@@ -211,12 +211,12 @@ char *argv[];
 	setftty();
 #ifdef TRACK
 	initrack();
-#endif TRACK
+#endif
 	for(;;) {
 		if(flags.move) {
 #ifdef TRACK
 			settrack();
-#endif TRACK
+#endif
 			if(moves%2 == 0 ||
 			  (!(Fast & ~INTRINSIC) && (!Fast || rn2(3)))) {
 				extern struct monst *makemon();
@@ -271,7 +271,7 @@ char *argv[];
 		find_ac();
 #ifndef QUEST
 		if(!flags.mv || Blind)
-#endif QUEST
+#endif
 		{
 			seeobjs();
 			seemons();
@@ -281,7 +281,7 @@ char *argv[];
 		if(multi > 0) {
 #ifdef QUEST
 			if(flags.run >= 4) finddir();
-#endif QUEST
+#endif
 			lookaround();
 			if(!multi) {	/* lookaround may clear multi */
 				flags.move = 0;
@@ -387,7 +387,7 @@ register int c,ct;
 	else printf("Hello %s, welcome to quest!\n", plname);
 #else
 	else printf("Hello %s, welcome to hack!\n", plname);
-#endif QUEST
+#endif
 }
 
 impossible(){
@@ -416,7 +416,7 @@ char ch;
 	if(!stopnews && pl_character[0])
 		getret();
 }
-#endif NEWS
+#endif
 
 chdirx(dir) char *dir; {
 	if(chdir(dir) < 0) {

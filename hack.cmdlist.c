@@ -11,10 +11,10 @@ dosave(),dowield(),ddoinv(),dozap(),ddocall(),dowhatis(),doengrave(),dotele(),
 dohelp(),doeat(),doddrop(),do_mname(),doidtrap(),doprwep(),doprarm(),doprring();
 #ifdef SHELL
 int dosh();
-#endif SHELL
+#endif
 #ifdef OPTIONS
 int doset();
-#endif OPTIONS
+#endif
 int doup(), dodown(), done1(), donull();
 int dothrow();
 struct func_tab list[]={
@@ -38,7 +38,7 @@ struct func_tab list[]={
 /*	'j', 'J', 'k', 'K', 'l', 'L', 'm', 'M', 'n', 'N' : move commands */
 #ifdef OPTIONS
 	'o', doset,
-#endif OPTIONS
+#endif
 /*	'O' : UNUSED */
 	'p', dopay,
 	'P', dowearring,
@@ -65,7 +65,7 @@ struct func_tab list[]={
 	'?', dohelp,
 #ifdef SHELL
 	'!', dosh,
-#endif SHELL
+#endif
 	'.', donull,
 	' ', donull,
 	',', dopickup,

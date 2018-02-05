@@ -8,7 +8,7 @@ doversion(){
 		"Quest"
 #else
 		"Hack"
-#endif QUEST
+#endif
 	, datestring);
 	return(0);
 }

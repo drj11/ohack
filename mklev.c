@@ -3,7 +3,7 @@
 
 #ifndef MKLEV
 #define	MKLEV
-#endif MKLEV
+#endif
 
 #include <stdio.h>
 #include "mklev.h"
@@ -20,7 +20,7 @@ char nul[40];
 
 #ifdef WIZARD
 boolean wizard;
-#endif WIZARD
+#endif
 
 #define somex() ((rand()%(croom->hx-croom->lx+1))+croom->lx)
 #define somey() ((rand()%(croom->hy-croom->ly+1))+croom->ly)
@@ -59,7 +59,7 @@ char *argv[];
 	fut_geno = argv[4];
 #ifdef WIZARD
 	wizard = (argv[5][0] == 'w');
-#endif WIZARD
+#endif
 	(void) srand(getpid());
 	init_objects();
 	rooms[0].hx = -1;	/* in case we are in a maze */
@@ -144,7 +144,7 @@ char *argv[];
 	if(wizard){
 		if(rn2(3)) mkshop(); else mkzoo();
 	} else
-#endif WIZARD
+#endif
  	if(dlevel > 1 && dlevel < 20 && rn2(dlevel) < 2) mkshop();
 	else
 	if(dlevel > 6 && (!rn2(7) || !strcmp("david", getlogin())))
