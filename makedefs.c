@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 /* construct definitions of object constants */
 #define	DEF_FILE	"def.objects.h"
 #define	LINSZ	1000
