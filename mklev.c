@@ -6,6 +6,7 @@
 #endif
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "mklev.h"
 #include "def.trap.h"
 #include "hack.onames.h"	/* for SCR_TELEPORTATION */

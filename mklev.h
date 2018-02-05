@@ -10,6 +10,8 @@
 #define	rindex	strrchr
 #endif
 
+#include <stdio.h>
+
 #include	"def.objclass.h"
 
 typedef struct {
@@ -19,8 +21,6 @@ typedef struct {
 #include	"def.monst.h"	/* uses coord */
 #include	"def.gen.h"
 #include	"def.obj.h"
-
-extern char *sprintf();
 
 #define	BUFSZ	256	/* for getlin buffers */
 #define	PL_NSIZ	32	/* name of player, ghost, shopkeeper */

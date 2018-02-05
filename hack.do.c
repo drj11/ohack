@@ -3,6 +3,7 @@
 			   - added flags.no_rest_on_space */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <signal.h>
 #include "hack.h"
 #include "def.func_tab.h"

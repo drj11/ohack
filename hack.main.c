@@ -2,6 +2,7 @@
 /* hack.main.c version 1.0.1 - some cosmetic changes */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <signal.h>
 #include <errno.h>
 #include "hack.h"

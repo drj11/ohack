@@ -3,6 +3,7 @@
 #include "hack.h"
 #include <stdio.h>
 #include <signal.h>
+#include <stdlib.h>
 #define	Strcat	(void) strcat
 #define	UNDEF_TYP	0
 #define	UNDEF_SPE	(-1)

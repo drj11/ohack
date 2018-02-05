@@ -4,6 +4,7 @@
 extern char genocided[60];	/* defined in Decl.c */
 extern char fut_geno[60];	/* idem */
 #include <signal.h>
+#include <stdlib.h>
 
 extern char SAVEF[], nul[];
 extern char pl_character[PL_CSIZ];

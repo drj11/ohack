@@ -4,6 +4,7 @@
 #include "hack.h"
 #include <signal.h>
 #include <stdio.h>
+#include <stdlib.h>
 extern struct monst *restmonchn();
 extern struct obj *restobjchn();
 extern struct obj *billobjs;

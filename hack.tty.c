@@ -2,6 +2,7 @@
 
 #include	"hack.h"
 #include	<stdio.h>
+#include <stdlib.h>
 #include	<sgtty.h>
 
 struct sgttyb inittyb, curttyb;
