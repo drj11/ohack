@@ -623,7 +623,7 @@ register struct permonst *mdat = mtmp->data;
 	if(ul < 14)    /* points are given based on present and future level */
 	    for(tmp2 = 0; !tmp2 || ul + tmp2 <= ml; tmp2++)
 		if(u.uexp + 1 + (tmp + ((tmp2 <= 0) ? 0 : 4<<(tmp2-1)))/nk
-		    >= 10*pow((unsigned)(ul-1)))
+		    >= 10*pow2((unsigned)(ul-1)))
 			if(++ul == 14) break;
 
 	tmp2 = ml - ul -1;
@@ -637,7 +637,7 @@ register struct permonst *mdat = mtmp->data;
 	u.uexp += tmp;
 	u.urexp += 4*tmp;
 	flags.botl = 1;
-	while(u.ulevel < 14 && u.uexp >= 10*pow(u.ulevel-1)){
+	while(u.ulevel < 14 && u.uexp >= 10*pow2(u.ulevel-1)){
 		pline("Welcome to level %d.", ++u.ulevel);
 		tmp = rnd(10);
 		if(tmp < 3) tmp = rnd(10);

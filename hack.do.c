@@ -207,7 +207,7 @@ pluslvl()
 	num = rnd(10);
 	u.uhpmax += num;
 	u.uhp += num;
-	u.uexp = (10*pow(u.ulevel-1))+1;
+	u.uexp = (10*pow2(u.ulevel-1))+1;
 	pline("Welcome to level %d.", ++u.ulevel);
 	flags.botl = 1;
 }

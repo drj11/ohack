@@ -132,6 +132,8 @@ extern long moves;
 
 extern int multi;
 
+int pow2(unsigned);
+
 
 extern char lock[];
 

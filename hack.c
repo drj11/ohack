@@ -730,7 +730,7 @@ sgn(a) register int a; {
 	return((a> 0) ? 1 : (a == 0) ? 0 : -1);
 }
 
-pow(num) /* returns 2 to the num */
+pow2(num) /* returns 2 to the num */
 register unsigned num;
 {
 	return(1 << num);
@@ -860,7 +860,7 @@ losexp()	/* hit by V or W */
 	num = rnd(10);
 	u.uhp -= num;
 	u.uhpmax -= num;
-	u.uexp = 10*pow(u.ulevel-1);
+	u.uexp = 10*pow2(u.ulevel-1);
 	flags.botl = 1;
 }
 
