@@ -3,29 +3,17 @@
    define the same constants, and the C preprocessor complains. */
 #include <stdio.h>
 #include "config.h"
-#ifdef BSD
-#include	<sgtty.h>
-struct ltchars ltchars, ltchars0;
-#else
-#include	<termio.h>	/* also includes part of <sgtty.h> */
+
+#include	<termio.h>
+
 struct termio termio;
-#endif
 
 getioctls() {
-#ifdef BSD
-	(void) ioctl(fileno(stdin), (int) TIOCGLTC, (char *) &ltchars);
-	(void) ioctl(fileno(stdin), (int) TIOCSLTC, (char *) &ltchars0);
-#else
 	(void) ioctl(fileno(stdin), (int) TCGETA, &termio);
-#endif
 }
 
 setioctls() {
-#ifdef BSD
-	(void) ioctl(fileno(stdin), (int) TIOCSLTC, (char *) &ltchars);
-#else
 	(void) ioctl(fileno(stdin), (int) TCSETA, &termio);
-#endif
 }
 
 
