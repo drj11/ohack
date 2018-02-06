@@ -10,7 +10,6 @@ extern char *itoa();
 
 extern char nul[];
 #ifndef NOWORM
-#include	"def.wseg.h"
 
 extern struct wseg *wsegs[32], *wheads[32];
 extern long wgrowtime[32];
