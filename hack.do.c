@@ -17,7 +17,7 @@ extern boolean hmon();
 
 /*	Routines to do various user commands */
 
-int done1();
+void done1(int);
 
 dodrink() {
 	register struct obj *otmp,*objs;

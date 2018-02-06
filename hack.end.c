@@ -11,7 +11,7 @@ extern char *itoa(), *ordin(), *eos(), *getlogin();
 
 xchar maxdlevel = 1;
 
-done1()
+void done1(int x)
 {
 	(void) signal(SIGINT,SIG_IGN);
 	pline("Really quit?");

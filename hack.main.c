@@ -13,7 +13,7 @@ extern char *getenv();
 
 int (*afternmv)();
 
-int done1();
+void done1(int);
 int hangup();
 
 char safelock[] = "safelock";
