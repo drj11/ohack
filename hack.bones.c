@@ -1,5 +1,6 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1984. */
 
+#include <string.h>
 #include "hack.h"
 extern char plname[PL_NSIZ];
 extern struct monst *makemon();

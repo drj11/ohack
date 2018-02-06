@@ -2,6 +2,7 @@
 
 #include	"hack.h"
 #include	<stdio.h>
+#include <string.h>
 extern struct obj *splitobj();
 extern char morc;
 #ifndef NOWORM
