@@ -8,7 +8,7 @@ TERMLIB = -ltermlib
 GAME = hack
 CAPGAME = HACK
 GAMEDIR = ../tmp
-CFLAGS = -O
+CFLAGS = -O -Werror
 HACKCSRC = hack.Decl.c\
 	hack.apply.c hack.bones.c hack.c hack.cmdlist.c hack.do.c\
 	hack.do_name.c hack.do_wear.c hack.dog.c hack.eat.c hack.end.c\
