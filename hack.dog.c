@@ -1,6 +1,8 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1985. */
 /* hack.dog.c version 1.0.1 - "You feel worried about %s." (Adri Verhoef) */
 
+#include <string.h>
+
 #include	"hack.h"
 #include	"hack.mfndpos.h"
 extern char POISONOUS[];
