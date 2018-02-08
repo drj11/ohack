@@ -1,5 +1,6 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1984. */
 
+#include <stdio.h>
 #include <string.h>
 
 #include	"config.h"		/* for typedefs */
