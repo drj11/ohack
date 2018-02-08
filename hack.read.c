@@ -220,7 +220,7 @@ doread() {
 			register int oux = u.ux, ouy = u.uy;
 			tele();
 			if(dist(oux, ouy) > 100) known = TRUE;
-#else QUEST
+#else
 			register int uroom = inroom(u.ux, u.uy);
 			tele();
 			if(uroom != inroom(u.ux, u.uy)) known = TRUE;
@@ -441,7 +441,7 @@ register boolean on;
 #ifdef QUEST
 		pline("The cave lights up around you, then fades.");
 		return;
-#else QUEST
+#else
 		if(levl[u.ux][u.uy].typ == CORR) {
 		    pline("The corridor lights up around you, then fades.");
 		    return;
@@ -456,7 +456,7 @@ register boolean on;
 do_it:
 #ifdef QUEST
 	return;
-#else QUEST
+#else
 	if(levl[u.ux][u.uy].lit == on)
 		return;
 	if(levl[u.ux][u.uy].typ == DOOR) {

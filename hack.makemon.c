@@ -4,7 +4,7 @@
 #ifdef MKLEV
 #include	"mklev.h"
 extern char *fut_geno;
-#else MKLEV
+#else
 #include	"hack.h"
 extern char fut_geno[];
 #endif
