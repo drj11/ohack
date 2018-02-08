@@ -15,7 +15,7 @@ extern char *getenv();
 int (*afternmv)();
 
 void done1(int);
-int hangup();
+void hangup(int);
 
 char safelock[] = "safelock";
 xchar locknum;				/* max num of players */

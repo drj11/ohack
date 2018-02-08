@@ -23,7 +23,7 @@ dosave(){
 }
 
 #ifndef NOSAVEONHANGUP
-hangup(){
+void hangup(int x){
 	(void) dosave0(1);
 	exit(1);
 }

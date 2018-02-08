@@ -409,7 +409,7 @@ register x;
 }
 
 #ifdef NOSAVEONHANGUP
-hangup(){
+void hangup(int x){
 	(void) signal(SIGINT,SIG_IGN);
 	clearlocks();
 	exit(1);
