@@ -2,6 +2,8 @@
 /* hack.engrave.c version 1.0.1 -
 	corrected bug in rest_engravings(),
 	added make_engr_at() */
+#include <stdlib.h>
+#include <string.h>
 #ifdef MKLEV
 #include	"mklev.h"
 #else
