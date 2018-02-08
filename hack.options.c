@@ -1,6 +1,8 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1985. */
 /* hack.options.c version 1.0.1 - added HACKOPTIONS */
 
+#include <string.h>
+
 #include "config.h"
 #ifdef OPTIONS
 #include "hack.h"
