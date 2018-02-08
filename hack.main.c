@@ -17,6 +17,8 @@ int (*afternmv)();
 void done1(int);
 void hangup(int);
 
+extern char genocided[], fut_geno[];
+
 char safelock[] = "safelock";
 xchar locknum;				/* max num of players */
 char *catmore = "/bin/cat";		/* or e.g. /usr/ucb/more */
@@ -158,7 +160,6 @@ char *argv[];
 		if(sfoo = getenv("GENOCIDED")){
 			if(*sfoo == '!'){
 				extern struct permonst mons[CMNUM+2];
-				extern char genocided[], fut_geno[];
 				register struct permonst *pm = mons;
 				register char *gp = genocided;
 
