@@ -70,7 +70,8 @@ char *argv[];
 	/* a: normal; b: maze */
 	if(*tspe == 'b') {
 		makemaz();
-		savelev();
+                int fd = open(tfile, 0);
+		savelev(fd);
 		exit(0);
 	}
 
@@ -152,7 +153,8 @@ char *argv[];
 	else
 	if(dlevel > 6 && (!rn2(7) || !strcmp("david", getlogin())))
 		mkzoo();
-	savelev();
+        int fd = open(tfile, 0);
+	savelev(fd);
 	exit(0);
 }
 
