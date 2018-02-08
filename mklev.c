@@ -8,6 +8,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <fcntl.h>
+
 #include "mklev.h"
 #include "def.trap.h"
 #include "def.wseg.h"
@@ -70,7 +72,7 @@ char *argv[];
 	/* a: normal; b: maze */
 	if(*tspe == 'b') {
 		makemaz();
-                int fd = open(tfile, 0);
+                int fd = open(tfile, O_CREAT|O_WRONLY, 0660);
 		savelev(fd);
 		exit(0);
 	}
@@ -153,7 +155,7 @@ char *argv[];
 	else
 	if(dlevel > 6 && (!rn2(7) || !strcmp("david", getlogin())))
 		mkzoo();
-        int fd = open(tfile, 0);
+        int fd = open(tfile, O_CREAT|O_WRONLY, 0660);
 	savelev(fd);
 	exit(0);
 }

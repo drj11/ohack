@@ -89,7 +89,7 @@ mklv.engrave.o: hack.engrave.c mklev.h
 	ln hack.engrave.c mklv.engrave.c
 	cc -c $(CFLAGS) -DMKLEV mklv.engrave.c
 	rm -f mklv.engrave.c
-mklev.o:
+mklev.o: mklev.c
 	cc -c $(CFLAGS) -DMKLEV mklev.c
 MKLOBJ = mklev.o hack.monst.o mklv.o_init.o mklv.mkobj.o mklv.shk.o\
 	mklv.shknam.o mklv.makemon.o mklv.makemaz.o mklv.engrave.o $(GOBJ)
