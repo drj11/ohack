@@ -1,5 +1,7 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1984. */
 
+#include <string.h>
+
 #include	"hack.h"
 #define Sprintf (void) sprintf
 #define Strcat  (void) strcat
