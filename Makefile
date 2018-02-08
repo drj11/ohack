@@ -1,7 +1,7 @@
 # Hack or Quest Makefile.
 
 # on some systems the termcap library is in -ltermcap
-TERMLIB = -ltermlib
+TERMLIB =
 
 
 # make hack
@@ -61,7 +61,7 @@ all:	$(GAME) mklev
 
 $(GAME):	$(HOBJ) $(GOBJ) Makefile
 	@echo "Loading ..."
-	@ld -X -o $(GAME) /lib/crt0.o $(GOBJ) $(HOBJ) $(TERMLIB) -lc
+	@ld -X -o $(GAME) $(GOBJ) $(HOBJ) $(TERMLIB)
 
 makedefs:	makedefs.c
 	cc -o makedefs makedefs.c
