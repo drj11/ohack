@@ -2,7 +2,7 @@
 
 /* objects have letter " % ) ( 0 _ [ ! ? / = * */
 #include "def.objclass.h"
-#define	NULL	(char *)0
+
 
 struct objclass objects[] = {
 
