@@ -243,6 +243,8 @@ char sym;
 	return(0);
 }
 
+struct monst boomcaught;
+
 struct monst *
 boomhit(dx,dy) {
 	register int i, ct;
@@ -279,7 +281,7 @@ boomhit(dx,dy) {
 			} else {	/* we catch it */
 				tmp_at(-1,-1);
 				pline("Skillfully, you catch the boomerang.");
-				return((struct monst *) -1);
+				return &boomcaught;
 			}
 		}
 		tmp_at(bhitpos.x, bhitpos.y);

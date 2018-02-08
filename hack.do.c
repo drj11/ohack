@@ -599,8 +599,8 @@ dothrow()
 		bhitpos.y = mon->my;
 	} else if(obj->otyp == BOOMERANG) {
 		mon = boomhit(u.dx,u.dy);
-		/* boomhit delivers -1 if the thing was caught */
-		if((int) mon == -1) {
+		/* if the thing was caught */
+		if(mon == &boomcaught) {
 			(void) addinv(obj);
 			return(1);
 		}
