@@ -44,6 +44,8 @@ typedef struct {
 
 #define TRAPNUM 9
 
+extern long moves;
+
 struct rm {
 	char scrsym;
 	unsigned typ:5;
