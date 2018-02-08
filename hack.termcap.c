@@ -2,6 +2,7 @@
 /* hack.termcap.c version 1.0.1 - added no-CE fix (Harold Rynes) */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "config.h"	/* for ROWNO and COLNO */
 extern char *tgetstr(), *tgoto(), *getenv();
 extern long *alloc();

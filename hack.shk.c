@@ -1,5 +1,8 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1984. */
 
+#include <stdlib.h>
+#include <string.h>
+
 #include "hack.h"
 #ifdef QUEST
 int shlevel = 0;

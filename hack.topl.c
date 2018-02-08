@@ -2,6 +2,8 @@
 
 #include "hack.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 extern char *eos();
 #define	TOPLSZ	(COLNO-8)	/* leave room for --More-- */
 char toplines[BUFSZ];

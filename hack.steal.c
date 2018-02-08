@@ -1,5 +1,7 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1984. */
 
+#include <stdlib.h>
+
 #include "hack.h"
 
 stealgold(mtmp)  register struct monst *mtmp; {
