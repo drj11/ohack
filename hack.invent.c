@@ -2,6 +2,7 @@
 
 #include	"hack.h"
 #include	<stdio.h>
+#include <stdlib.h>
 #include <string.h>
 extern struct obj *splitobj();
 extern char morc;
@@ -174,6 +175,8 @@ register struct gen *ptr;
  return(0);
 }
 
+struct obj noobj;
+
 /* getobj returns:
 	struct obj *xxx:	object to do something with.
 	0				error return: no object.
@@ -266,7 +269,7 @@ register char *let,*word;
 		if(ilet == '\033' || ilet == ' ' || ilet == '\n')
 			return((struct obj *)0);
 		if(ilet == '-') {
-			return((struct obj *)(allownone ? -1 : 0));
+			return((struct obj *)(allownone ? &noobj : 0));
 		}
 		if(ilet == '$') {
 			if(!allowgold){

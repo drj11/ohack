@@ -138,6 +138,7 @@ int pow2(unsigned);
 extern char lock[];
 
 extern struct monst boomcaught;
+extern struct obj noobj;
 
 
 #define DIST(x1,y1,x2,y2)       (((x1)-(x2))*((x1)-(x2)) + ((y1)-(y2))*((y1)-(y2)))
