@@ -3,6 +3,8 @@
 
 #include "hack.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 coord
 getpos(force,goal) int force; char *goal; {
@@ -129,7 +131,7 @@ char buf[BUFSZ];
 		}
 	}
 	/* obfree(obj, otmp2);	/* now unnecessary: no pointers on bill */
-	free((char *) obj);	/* let us hope nobody else saved a pointer */
+	free(obj);	/* let us hope nobody else saved a pointer */
 }
 
 ddocall()
