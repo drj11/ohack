@@ -3,19 +3,14 @@
 #include	"hack.h"
 #include	<stdio.h>
 #include <stdlib.h>
-#include	<sgtty.h>
+#include	<termios.h>
 
-struct sgttyb inittyb, curttyb;
-extern short ospeed;
+struct termios initerm, curterm;
 
 
 gettty(){
-	(void) gtty(0, &inittyb);
-	(void) gtty(0, &curttyb);
-	ospeed = inittyb.sg_ospeed;
-/*
-	if(ospeed <= B300) flags.oneline = 1;
-*/
+	(void) tcgetattr(0, &initerm);
+	(void) tcgetattr(0, &curterm);
 	getioctls();
 	xtabs();
 }
@@ -23,30 +18,30 @@ gettty(){
 /* reset terminal to original state */
 settty(s) char *s; {
 	clear_screen();
-	if(s) printf(s);
+	if(s) printf("%s", s);
 	(void) fflush(stdout);
-	if(stty(0, &inittyb) == -1) puts("Cannot change tty");
-	flags.echo = (inittyb.sg_flags & ECHO) ? ON : OFF;
-	flags.cbreak = (inittyb.sg_flags & CBREAK) ? ON : OFF;
+	if(tcsetattr(0, TCSADRAIN, &initerm) == -1) puts("Cannot change tty");
+	flags.echo = (initerm.c_lflag & ECHO) ? ON : OFF;
+	flags.cbreak = (initerm.c_lflag & ICANON) ? OFF : ON;
 	setioctls();
 }
 
 setctty(){
-	if(stty(0, &curttyb) == -1) puts("Cannot change tty");
+	if(tcsetattr(0, TCSADRAIN, &curterm) == -1) puts("Cannot change tty");
 }
 
 setftty(){
 register int ef = (flags.echo == ON) ? ECHO : 0;
-register int cf = (flags.cbreak == ON) ? CBREAK : 0;
+register int cf = (flags.cbreak == ON) ? 0 : ICANON;
 register int change = 0;
-	if((curttyb.sg_flags & ECHO) != ef){
-		curttyb.sg_flags &= ~ECHO;
-		curttyb.sg_flags |= ef;
+	if((curterm.c_lflag & ECHO) != ef){
+		curterm.c_lflag &= ~ECHO;
+		curterm.c_lflag |= ef;
 		change++;
 	}
-	if((curttyb.sg_flags & CBREAK) != cf){
-		curttyb.sg_flags &= ~CBREAK;
-		curttyb.sg_flags |= cf;
+	if((curterm.c_lflag & ICANON) != cf){
+		curterm.c_lflag &= ~ICANON;
+		curterm.c_lflag |= cf;
 		change++;
 	}
 	if(change){
@@ -57,12 +52,10 @@ register int change = 0;
 echo(n)
 register n;
 {
-
-	/* (void) gtty(0,&curttyb); */
 	if(n == ON)
-		curttyb.sg_flags |= ECHO;
+		curterm.c_lflag |= ECHO;
 	else
-		curttyb.sg_flags &= ~ECHO;
+		curterm.c_lflag &= ~ECHO;
 	setctty();
 }
 
@@ -72,7 +65,7 @@ xtabs()
 {
 
 	/* (void) gtty(0, &curttyb); */
-	curttyb.sg_flags |= XTABS;
+	// curttyb.sg_flags |= XTABS;
 	setctty();
 }
 
@@ -83,9 +76,9 @@ register n;
 
 	/* (void) gtty(0,&curttyb); */
 	if(n == ON)
-		curttyb.sg_flags |= CBREAK;
+		curterm.l_cflag &= ~ICANON;
 	else
-		curttyb.sg_flags &= ~CBREAK;
+		curterm.l_cflag |= ICANON;
 	setctty();
 }
 #endif
@@ -165,7 +158,7 @@ register int c;
 char *
 parse()
 {
-	static char inline[COLNO];
+	static char inpline[COLNO];
 	register foo;
 
 	flags.move = 1;
@@ -175,27 +168,27 @@ parse()
 		multi += 10*multi+foo-'0';
 	if(multi) {
 		multi--;
-		save_cm = inline;
+		save_cm = inpline;
 	}
-	inline[0] = foo;
-	inline[1] = 0;
+	inpline[0] = foo;
+	inpline[1] = 0;
 	if(foo == EOF) {
 		settty("End of input?\n");
 		exit(0);
 	}
 	if(foo == 'f' || foo == 'F'){
-		inline[1] = getchar();
+		inpline[1] = getchar();
 #ifdef QUEST
-		if(inline[1] == foo) inline[2] = getchar(); else
+		if(inpline[1] == foo) inpline[2] = getchar(); else
 #endif
-		inline[2] = 0;
+		inpline[2] = 0;
 	}
 	if(foo == 'm' || foo == 'M'){
-		inline[1] = getchar();
-		inline[2] = 0;
+		inpline[1] = getchar();
+		inpline[2] = 0;
 	}
 	clrlin();
-	return(inline);
+	return(inpline);
 }
 
 char
