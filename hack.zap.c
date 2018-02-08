@@ -1,5 +1,7 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1984. */
 
+#include <strings.h>
+
 #include "hack.h"
 
 extern struct monst *makemon();

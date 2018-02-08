@@ -61,7 +61,7 @@ all:	$(GAME) mklev
 
 $(GAME):	$(HOBJ) $(GOBJ) Makefile
 	@echo "Loading ..."
-	@ld -X -o $(GAME) $(GOBJ) $(HOBJ) $(TERMLIB)
+	cc -o $(GAME) $(GOBJ) $(HOBJ) $(TERMLIB)
 
 makedefs:	makedefs.c
 	cc -o makedefs makedefs.c
