@@ -1,10 +1,12 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1985. */
 /* hack.mon.c version 1.0.1 - some unimportant changes */
 
+#include <stdlib.h>
+
 #include "hack.h"
 #include "hack.mfndpos.h"
 #define	SIZE(x)	(int)(sizeof(x) / sizeof(x[0]))
-#define	NULL	(char *) 0
+
 extern struct monst *makemon();
 
 int warnlevel;		/* used by movemon and dochugw */
@@ -568,7 +570,7 @@ dmonsfree(){
 register struct monst *mtmp;
 	while(mtmp = fdmon){
 		fdmon = mtmp->nmon;
-		free((char *) mtmp);
+		free(mtmp);
 	}
 }
 
