@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
+#include <string.h>
 #define	Sprintf	(void) sprintf
 extern char plname[], pl_character[];
 extern char *itoa(), *ordin(), *eos(), *getlogin();
@@ -20,7 +21,7 @@ void done1(int x)
 		clrlin();
 		(void) fflush(stdout);
 		if(multi > 0) nomul(0);
-		return(0);
+		return;
 	}
 	done("quit");
 	/* NOTREACHED */
@@ -28,7 +29,7 @@ void done1(int x)
 
 int done_stopprint;
 
-done_intr(){
+void done_intr(int x){
 	done_stopprint++;
 	(void) signal(SIGINT,SIG_IGN);
 }
@@ -349,7 +350,7 @@ char linebuf[BUFSZ];
 	    (killed || starv) ? "" : " dungeon", t1->level);
 	  if(t1->maxlvl != t1->level)
 	    Sprintf(eos(linebuf), " [max %d]", t1->maxlvl);
-	  if(quit && t1->death[4]) Sprintf(eos(linebuf), t1->death + 4);
+	  if(quit && t1->death[4]) Sprintf(eos(linebuf), "%s", t1->death + 4);
 	}
 	if(killed) Sprintf(eos(linebuf), " by %s%s",
 	  !strncmp(t1->death, "the ", 4) ? "" :
@@ -360,7 +361,7 @@ char linebuf[BUFSZ];
 	  register char *bp = eos(linebuf);
 	  char hpbuf[10];
 	  int hppos;
-	  Sprintf(hpbuf, (t1->hp > 0) ? itoa(t1->hp) : "-");
+	  Sprintf(hpbuf, "%s", (t1->hp > 0) ? itoa(t1->hp) : "-");
 	  hppos = COLNO - 7 - strlen(hpbuf);
 	  if(bp <= linebuf + hppos) {
 	    while(bp < linebuf + hppos) *bp++ = ' ';
