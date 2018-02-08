@@ -1,6 +1,8 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1985. */
 /* hack.read.c version 1.0.1 - tiny correction in SCR_MAGIC_MAPPING */
 
+#include <string.h>
+
 #include "hack.h"
 
 extern struct monst *makemon();

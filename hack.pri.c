@@ -4,6 +4,7 @@
 #include "hack.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 xchar scrlx, scrhx, scrly, scrhy;	/* corners of new area on screen */
 
 extern char *hu_stat[];	/* in eat.c */
