@@ -1,6 +1,8 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1985. */
 /* hack.makemon.c version 1.0.1 - newly created demons do not sleep */
 
+#include <string.h>
+
 #ifdef MKLEV
 #include	"mklev.h"
 extern char *fut_geno;
