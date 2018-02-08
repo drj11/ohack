@@ -378,7 +378,7 @@ dohelp()
 dosh(){
 register char *str;
 	if(child(0)) {
-		(void) chdir(getenv("HOME"));
+		if(chdir(getenv("HOME")));
 		if(str = getenv("SHELL")) execl(str,str,(char *) 0);
 		if(strcmp("player", getlogin()))
 			execl("/bin/sh","sh",(char *) 0);
@@ -399,7 +399,7 @@ child(wt) {
 register int f = fork();
 	if(f == 0){		/* child */
 		settty((char *) 0);
-		(void) setuid(getuid());
+		if(setuid(getuid()));
 		return(1);
 	}
 	if(f == -1) {	/* cannot fork */
