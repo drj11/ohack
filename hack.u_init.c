@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <signal.h>
 #include <stdlib.h>
+#include <string.h>
 #define	Strcat	(void) strcat
 #define	UNDEF_TYP	0
 #define	UNDEF_SPE	(-1)
@@ -79,7 +80,7 @@ struct trobj Wizard[] = {
 #ifdef NEWS
 int u_in_infl;
 
-u_in_intrup(){
+void u_in_intrup(int x){
 	u_in_infl++;
 	(void) signal(SIGINT, u_in_intrup);
 }
@@ -91,7 +92,7 @@ register int c,pc,i;
 	/* It is not unlikely that we get an interrupt here
 	   intended to kill the news; unfortunately this would
 	   also kill (part of) the following question */
-int (*prevsig)() = signal(SIGINT, u_in_intrup);
+void (*prevsig)(int) = signal(SIGINT, u_in_intrup);
 #endif
 register char *cp;
 char buf[256];
