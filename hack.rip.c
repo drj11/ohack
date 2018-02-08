@@ -2,6 +2,8 @@
 
 #include	<sys/types.h>		/* for time_t */
 #include <stdio.h>
+#include <string.h>
+#include <time.h>
 #include "hack.h"
 #ifdef BSD
 #include	<sys/time.h>
