@@ -19,7 +19,7 @@ dowield()
 	else if(uwep && uwep->cursed)
 		pline("The %s welded to your hand!",
 			aobjnam(uwep, "are"));
-	else if((int) wep == -1) {
+	else if(wep == &noobj) {
 		if(uwep == 0){
 			pline("You are already empty handed.");
 		} else {
