@@ -1,6 +1,7 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1985. */
 /* savelev.h version 1.0.1 - also save engravings from MKLEV */
 
+#include <stddef.h>
 #include <stdio.h>
 extern struct monst *restmonchn();
 extern struct obj *restobjchn();
@@ -100,7 +101,7 @@ register struct monst *mtmp;
 	register struct monst *mtmp2;
 	unsigned xl;
 	int minusone = -1;
-	int monnum;
+	ptrdiff_t monnum;
 #ifdef FUNNYRELOC
 	struct permonst *monbegin = &mons[0];
 
