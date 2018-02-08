@@ -399,13 +399,13 @@ impossible(){
 #ifdef NEWS
 int stopnews;
 
-stopnws(){
+void stopnws(int x){
 	(void) signal(SIGINT, SIG_IGN);
 	stopnews++;
 }
 
 outnews(fd) int fd; {
-int (*prevsig)();
+void (*prevsig)(int);
 char ch;
 	prevsig = signal(SIGINT, stopnws);
 	while(!stopnews && read(fd,&ch,1) == 1)
