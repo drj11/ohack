@@ -1,10 +1,12 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1985. */
 /* hack.read.c version 1.0.1 - tiny correction in SCR_MAGIC_MAPPING */
 
+#include <stdlib.h>
 #include <string.h>
 
 #include "hack.h"
 
+extern struct obj *some_armor();
 extern struct monst *makemon();
 int identify();
 
@@ -29,7 +31,7 @@ doread() {
 	switch(scroll->otyp) {
 
 	case SCR_ENCHANT_ARMOR:
-	    {	extern struct obj *some_armor();
+	    {
 		register struct obj *otmp = some_armor();
 		if(!otmp) {
 			strange_feeling(scroll);
