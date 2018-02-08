@@ -5,14 +5,14 @@
 #include <stdio.h>
 extern struct monst *restmonchn();
 extern struct obj *restobjchn();
-extern struct obj *billobjs;
+struct obj *billobjs;
 extern char *itoa();
 
 extern char nul[];
 #ifndef NOWORM
 
-extern struct wseg *wsegs[32], *wheads[32];
-extern long wgrowtime[32];
+struct wseg *wsegs[32], *wheads[32];
+long wgrowtime[32];
 #endif
 
 savelev(fd){
