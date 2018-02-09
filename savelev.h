@@ -64,13 +64,10 @@ savelev(fd){
 /*--------------------------------------------------------------------*/
 }
 
-bwrite(fd,loc,num)
-register int fd;
-register char *loc;
-register unsigned num;
+bwrite(int fd, void *loc, unsigned num)
 {
 /* lint wants the 3rd arg of write to be an int; lint -p an unsigned */
-	if(write(fd, loc, (int) num) != num)
+	if(write(fd, loc, num) != num)
 		panic("cannot write %d bytes to file #%d",num,fd);
 }
 

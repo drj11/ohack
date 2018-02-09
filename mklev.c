@@ -9,13 +9,13 @@
 #include <stdlib.h>
 
 #include <fcntl.h>
+#include <unistd.h>
 
 #include "mklev.h"
 #include "def.trap.h"
 #include "def.wseg.h"
 #include "hack.onames.h"	/* for SCR_TELEPORTATION */
 
-extern char *getlogin();
 extern struct monst *makemon();
 
 char *tfile,*tspe,**args;
@@ -615,7 +615,7 @@ char *str,*arg1,*arg2,*arg3;
 	char bufr[BUFSZ];
 
 	(void) sprintf(bufr,str,arg1,arg2,arg3);
-	(void) write(1,"\nMKLEV ERROR:  ",15);
+	if(write(1,"\nMKLEV ERROR:  ",15));
 	puts(bufr);
 	(void) fflush(stdout);
 	exit(1);

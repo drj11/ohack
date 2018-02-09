@@ -106,16 +106,13 @@ getlev(fd)
 	return(0);
 }
 
-mread(fd, buf, len)
-register fd;
-register char *buf;
-register unsigned len;
+void mread(int fd, void *buf, size_t len)
 {
-register int rlen;
-	rlen = read(fd, buf, (int) len);
+        size_t rlen;
+	rlen = read(fd, buf, len);
 	if(rlen != len){
-		pline("Read %d instead of %d bytes\n", rlen, len);
-		panic("Cannot read %d bytes from file #%d\n", len, fd);
+		pline("Read %z instead of %z bytes\n", rlen, len);
+		panic("Cannot read %z bytes from file #%d\n", len, fd);
 	}
 }
 

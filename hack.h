@@ -13,6 +13,8 @@ extern struct obj *uchain;	/* defined iff PUNISHED */
 extern struct obj *uball;	/* defined if PUNISHED */
 struct obj *o_at(), *getobj(), *sobj_at();
 
+void mread(int, void *, size_t);
+
 struct flag {
 	unsigned ident;		/* social security number for each monster */
 	unsigned topl:2;	/* a top line (message) has been printed */

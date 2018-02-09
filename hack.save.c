@@ -1,10 +1,12 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1984. */
 
+#include <signal.h>
+#include <stddef.h>
+#include <stdlib.h>
+
 #include "hack.h"
 extern char genocided[60];	/* defined in Decl.c */
 extern char fut_geno[60];	/* idem */
-#include <signal.h>
-#include <stdlib.h>
 
 extern char SAVEF[], nul[];
 extern char pl_character[PL_CSIZ];
@@ -17,9 +19,6 @@ dosave(){
 		settty("Be seeing you ...\n");
 		exit(0);
 	}
-#ifdef lint
-	return(0);
-#endif
 }
 
 #ifndef NOSAVEONHANGUP
@@ -135,17 +134,14 @@ register fd;
 	register struct obj *otmp, *otmp2;
 	register struct obj *first = 0;
 	int xl;
-#ifdef lint
-	/* suppress "used before set" warning from lint */
-	otmp2 = 0;
-#endif
+
 	while(1) {
-		mread(fd, (char *) &xl, sizeof(xl));
+		mread(fd, &xl, sizeof(xl));
 		if(xl == -1) break;
 		otmp = newobj(xl);
 		if(!first) first = otmp;
 		else otmp2->nobj = otmp;
-		mread(fd, (char *) otmp, (unsigned) xl + sizeof(struct obj));
+		mread(fd, otmp, xl + sizeof(struct obj));
 		if(!otmp->o_id)	/* from MKLEV */
 			otmp->o_id = flags.ident++;
 		otmp2 = otmp;
@@ -167,15 +163,11 @@ register fd;
 	int xl;
 
 	struct permonst *monbegin;
-	long differ;
+	ptrdiff_t differ;
 
 	mread(fd, (char *)&monbegin, sizeof(monbegin));
 	differ = (char *)(&mons[0]) - (char *)(monbegin);
 
-#ifdef lint
-	/* suppress "used before set" warning from lint */
-	mtmp2 = 0;
-#endif
 	while(1) {
 		mread(fd, (char *) &xl, sizeof(xl));
 		if(xl == -1) break;
@@ -192,7 +184,7 @@ register fd;
 				initworm(mtmp);
 				mtmp->msleep = 0;
 			}
- #endif
+#endif
 		}
 		if(mtmp->minvent)
 			mtmp->minvent = restobjchn(fd);
