@@ -24,12 +24,15 @@ savelev(fd){
 	if(fd < 0)
            panic("Save on bad file!");
 
-	bwrite(fd,(char *) levl,sizeof(levl));
-	bwrite(fd,(char *) &moves,sizeof(long));
-	bwrite(fd,(char *) &xupstair,sizeof(xupstair));
-	bwrite(fd,(char *) &yupstair,sizeof(yupstair));
-	bwrite(fd,(char *) &xdnstair,sizeof(xdnstair));
-	bwrite(fd,(char *) &ydnstair,sizeof(ydnstair));
+        FILE *log = fdopen(3, "wb");
+        fprintf(log, "levl: %zd, %zd\n",
+            sizeof levl[0][0], sizeof levl);
+	bwrite(fd, levl,sizeof(levl));
+	bwrite(fd, &moves,sizeof(long));
+	bwrite(fd, &xupstair,sizeof(xupstair));
+	bwrite(fd, &yupstair,sizeof(yupstair));
+	bwrite(fd, &xdnstair,sizeof(xdnstair));
+	bwrite(fd, &ydnstair,sizeof(ydnstair));
 	savemonchn(fd, fmon);
 	savegenchn(fd, fgold);
 	savegenchn(fd, ftrap);
