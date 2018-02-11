@@ -27,7 +27,12 @@ savelev(fd){
 	if(fd < 0)
            panic("Save on bad file!");
 
-        FILE *log = fdopen(9, "wb");
+        FILE *log = 0;
+        if(fcntl(9, F_GETFD) == -1) {
+            log = fopen("/dev/null", "w");
+        } else {
+            log = fdopen(9, "w");
+        }
         fprintf(log, "levl: %zd, %zd\n",
             sizeof levl[0][0], sizeof levl);
 	bwrite(fd, levl,sizeof(levl));

@@ -1,11 +1,15 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1985. */
 /* hack.lev.c version 1.0.1 - somewhat more careful monster regeneration */
 
-#include "hack.h"
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+#include <fcntl.h>
 #include <unistd.h>
+
+#include "hack.h"
+
 extern struct monst *restmonchn();
 extern struct obj *restobjchn();
 extern struct obj *billobjs;
