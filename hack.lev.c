@@ -111,8 +111,8 @@ void mread(int fd, void *buf, size_t len)
         size_t rlen;
 	rlen = read(fd, buf, len);
 	if(rlen != len){
-		pline("Read %z instead of %z bytes\n", rlen, len);
-		panic("Cannot read %z bytes from file #%d\n", len, fd);
+		pline("Read %zu instead of %zu bytes\n", rlen, len);
+		panic("Cannot read %zu bytes from file #%d\n", len, fd);
 	}
 }
 
