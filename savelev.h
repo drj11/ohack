@@ -48,10 +48,10 @@ savelev(fd){
 	saveobjchn(fd, log, billobjs);
         billobjs = 0;
 #ifndef QUEST
-	bwrite(fd,(char *) rooms,sizeof(rooms));
-	bwrite(fd,(char *) doors,sizeof(doors));
+	bwrite(fd, rooms, sizeof rooms);
+	bwrite(fd, doors, sizeof doors);
 #endif
-	save_engravings(fd);
+	save_engravings(fd, log);
 
 	   fgold = ftrap = 0;
 	   fmon = 0;

@@ -2,6 +2,7 @@
 /* hack.engrave.c version 1.0.1 -
 	corrected bug in rest_engravings(),
 	added make_engr_at() */
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #ifdef MKLEV
@@ -246,9 +247,10 @@ register struct obj *otmp;
 #endif
 
 void
-save_engravings(int fd)
+save_engravings(int fd, FILE *log)
 {
         struct engr *ep = head_engr;
+        fprintf(log, "engr %zu\n", sizeof *ep);
 	while(ep) {
 		if(!ep->engr_lth || !ep->engr_txt[0]){
 			ep = ep->nxt_engr;
@@ -258,7 +260,7 @@ save_engravings(int fd)
 		bwrite(fd, ep, (sizeof *ep) + ep->engr_lth);
 		ep = ep->nxt_engr;
 	}
-        bwrite(fd, (char *) nul, sizeof(unsigned));
+        bwrite(fd, nul, sizeof ep->engr_lth);
 }
 
 #ifndef MKLEV

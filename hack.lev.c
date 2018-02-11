@@ -88,11 +88,11 @@ getlev(fd)
 	free((char *) gtmp);
 	fobj = restobjchn(fd);
 	billobjs = restobjchn(fd);
-	rest_engravings(fd);
 #ifndef QUEST
 	mread(fd, (char *)rooms, sizeof(rooms));
 	mread(fd, (char *)doors, sizeof(doors));
 #endif
+	rest_engravings(fd);
 	if(!omoves) return(0);	/* from MKLEV */
 #ifndef NOWORM
 	mread(fd, (char *)wsegs, sizeof(wsegs));
