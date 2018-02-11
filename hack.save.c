@@ -155,28 +155,25 @@ register fd;
 }
 
 struct monst *
-restmonchn(fd)
-register fd;
+restmonchn(int fd)
 {
 	register struct monst *mtmp, *mtmp2;
 	register struct monst *first = 0;
 	int xl;
 
-	struct permonst *monbegin;
-	ptrdiff_t differ;
-
-	mread(fd, (char *)&monbegin, sizeof(monbegin));
-	differ = (char *)(&mons[0]) - (char *)(monbegin);
 
 	while(1) {
+                ptrdiff_t differ;
 		mread(fd, (char *) &xl, sizeof(xl));
-		if(xl == -1) break;
+		if(xl == -1) {
+                        break;
+                }
 		mtmp = newmonst(xl);
 		if(!first) first = mtmp;
 		else mtmp2->nmon = mtmp;
 		mread(fd, (char *) mtmp, (unsigned) xl + sizeof(struct monst));
-		mtmp->data = (struct permonst *)
-			((char *) mtmp->data + differ);
+                differ = (ptrdiff_t)mtmp->data;
+		mtmp->data = &mons[0] + differ;
 		if(!mtmp->m_id) {			/* from MKLEV */
 			mtmp->m_id = flags.ident++;
 #ifndef NOWORM

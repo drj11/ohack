@@ -101,15 +101,10 @@ savemonchn(int fd, FILE *log, struct monst *mtmp)
 {
 	struct monst *mtmp2;
 	unsigned xl;
-	ptrdiff_t monnum;
-#ifdef FUNNYRELOC
-	struct permonst *monbegin = &mons[0];
-
-	bwrite(fd, (char *) &monbegin, sizeof(monbegin));
-#endif
 
 	fprintf(log, "monst %zu, %zu\n", sizeof xl, sizeof *mtmp);
 	while(mtmp) {
+                ptrdiff_t monnum;
 		mtmp2 = mtmp->nmon;
 		xl = mtmp->mxlth + mtmp->mnamelth;
 		bwrite(fd, &xl, sizeof xl);
@@ -121,8 +116,7 @@ savemonchn(int fd, FILE *log, struct monst *mtmp)
 		mtmp->data = (struct permonst *)monnum;
 		bwrite(fd, mtmp, xl + sizeof *mtmp);
 		if(mtmp->minvent) saveobjchn(fd, log, mtmp->minvent);
-/*		if (!ismklev) */
-		   free((char *) mtmp);
+		free(mtmp);
 		mtmp = mtmp2;
 	}
         xl = -1;
