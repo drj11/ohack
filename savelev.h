@@ -3,8 +3,11 @@
 
 #include <stddef.h>
 #include <stdio.h>
+
 extern struct monst *restmonchn();
 extern struct obj *restobjchn();
+void savegenchn(int, FILE *, struct gen *);
+void saveobjchn(int, FILE *, struct obj *);
 struct obj *billobjs;
 extern char *itoa();
 
@@ -33,11 +36,11 @@ savelev(fd){
 	bwrite(fd, &yupstair,sizeof(yupstair));
 	bwrite(fd, &xdnstair,sizeof(xdnstair));
 	bwrite(fd, &ydnstair,sizeof(ydnstair));
-	savemonchn(fd, fmon);
-	savegenchn(fd, fgold);
-	savegenchn(fd, ftrap);
-	saveobjchn(fd, fobj);
-	saveobjchn(fd, billobjs);
+	savemonchn(fd, log, fmon);
+	savegenchn(fd, log, fgold);
+	savegenchn(fd, log, ftrap);
+	saveobjchn(fd, log, fobj);
+	saveobjchn(fd, log, billobjs);
 /*	if (!ismklev) */
 	   billobjs = 0;
 #ifndef QUEST
@@ -74,33 +77,30 @@ bwrite(int fd, void *loc, unsigned num)
 		panic("cannot write %d bytes to file #%d",num,fd);
 }
 
-saveobjchn(fd,otmp)
-register int fd;
-register struct obj *otmp;
+void
+saveobjchn(int fd, FILE *log, struct obj *otmp)
 {
 	register struct obj *otmp2;
 	unsigned xl;
-	int minusone = -1;
 
+        fprintf(log, "obj %zu\n", sizeof *otmp);
 	while(otmp) {
 		otmp2 = otmp->nobj;
 		xl = otmp->onamelth;
-		bwrite(fd, (char *) &xl, sizeof(int));
-		bwrite(fd, (char *) otmp, xl + sizeof(struct obj));
+		bwrite(fd, &xl, sizeof xl);
+		bwrite(fd, otmp, xl + sizeof *otmp);
 /*		if (!ismklev) */
 			free((char *) otmp);
 		otmp = otmp2;
 	}
-	bwrite(fd, (char *) &minusone, sizeof(int));
+        xl = -1;
+	bwrite(fd, &xl, sizeof xl);
 }
 
-savemonchn(fd,mtmp)
-register int fd;
-register struct monst *mtmp;
+savemonchn(int fd, FILE *log, struct monst *mtmp)
 {
-	register struct monst *mtmp2;
+	struct monst *mtmp2;
 	unsigned xl;
-	int minusone = -1;
 	ptrdiff_t monnum;
 #ifdef FUNNYRELOC
 	struct permonst *monbegin = &mons[0];
@@ -108,39 +108,40 @@ register struct monst *mtmp;
 	bwrite(fd, (char *) &monbegin, sizeof(monbegin));
 #endif
 
+	fprintf(log, "monst %zu, %zu\n", sizeof xl, sizeof *mtmp);
 	while(mtmp) {
 		mtmp2 = mtmp->nmon;
 		xl = mtmp->mxlth + mtmp->mnamelth;
-		bwrite(fd, (char *) &xl, sizeof(int));
+		bwrite(fd, &xl, sizeof xl);
 
 		/* JAT - just save the offset into the monster table, */
 		/* it will be relocated when read in */
+		fprintf(log, "Writing %s\n", mtmp->data->mname);
 		monnum = mtmp->data - &mons[0];
 		mtmp->data = (struct permonst *)monnum;
-#ifdef DEBUGMON
-		myprintf("Wrote monster #%d", monnum);
-#endif
-		bwrite(fd, (char *) mtmp, xl + sizeof(struct monst));
-		if(mtmp->minvent) saveobjchn(fd,mtmp->minvent);
+		bwrite(fd, mtmp, xl + sizeof *mtmp);
+		if(mtmp->minvent) saveobjchn(fd, log, mtmp->minvent);
 /*		if (!ismklev) */
 		   free((char *) mtmp);
 		mtmp = mtmp2;
 	}
-	bwrite(fd, (char *) &minusone, sizeof(int));
+        xl = -1;
+	bwrite(fd,  &xl, sizeof xl);
 }
 
-savegenchn(fd,gtmp)
-register int fd;
-register struct gen *gtmp;
+void
+savegenchn(int fd, FILE *log, struct gen *gtmp)
 {
+        unsigned long c = 0;
 	register struct gen *gtmp2;
 	while(gtmp) {
+                c += 1;
 		gtmp2 = gtmp->ngen;
-		bwrite(fd, (char *) gtmp, sizeof(struct gen));
-/*		if (!ismklev) */
-		   free((char *) gtmp);
+		bwrite(fd, gtmp, sizeof *gtmp);
+                free( gtmp);
 		gtmp = gtmp2;
 	}
+        fprintf(log, "gen %zu, count %lu\n", sizeof *gtmp, c);
 	bwrite(fd, nul, sizeof(struct gen));
 }
 
