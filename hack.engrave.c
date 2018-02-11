@@ -245,27 +245,29 @@ register struct obj *otmp;
 }
 #endif
 
-save_engravings(fd) int fd; {
-register struct engr *ep = head_engr;
+void
+save_engravings(int fd)
+{
+        struct engr *ep = head_engr;
 	while(ep) {
 		if(!ep->engr_lth || !ep->engr_txt[0]){
 			ep = ep->nxt_engr;
 			continue;
 		}
-		bwrite(fd, (char *) & (ep->engr_lth), sizeof(ep->engr_lth));
-		bwrite(fd, (char *) ep, sizeof(struct engr) + ep->engr_lth);
+		bwrite(fd,  &ep->engr_lth, sizeof ep->engr_lth);
+		bwrite(fd, ep, (sizeof *ep) + ep->engr_lth);
 		ep = ep->nxt_engr;
 	}
- bwrite(fd, (char *) nul, sizeof(unsigned));
+        bwrite(fd, (char *) nul, sizeof(unsigned));
 }
 
 #ifndef MKLEV
 rest_engravings(fd) int fd; {
-register struct engr *ep;
-unsigned lth;
+        struct engr *ep;
+        unsigned lth;
 	head_engr = 0;
 	while(1) {
-		mread(fd, (char *) &lth, sizeof(unsigned));
+		mread(fd, &lth, sizeof lth);
 		if(lth == 0) return;
 		ep = (struct engr *) alloc(sizeof(struct engr) + lth);
 		mread(fd, (char *) ep, sizeof(struct engr) + lth);
