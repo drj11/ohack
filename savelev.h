@@ -27,7 +27,7 @@ savelev(fd){
 	if(fd < 0)
            panic("Save on bad file!");
 
-        FILE *log = fdopen(3, "wb");
+        FILE *log = fdopen(9, "wb");
         fprintf(log, "levl: %zd, %zd\n",
             sizeof levl[0][0], sizeof levl);
 	bwrite(fd, levl,sizeof(levl));
@@ -41,19 +41,17 @@ savelev(fd){
 	savegenchn(fd, log, ftrap);
 	saveobjchn(fd, log, fobj);
 	saveobjchn(fd, log, billobjs);
-/*	if (!ismklev) */
-	   billobjs = 0;
+        billobjs = 0;
 #ifndef QUEST
 	bwrite(fd,(char *) rooms,sizeof(rooms));
 	bwrite(fd,(char *) doors,sizeof(doors));
 #endif
 	save_engravings(fd);
-/* 	if (!ismklev) */
-	   {
+
 	   fgold = ftrap = 0;
 	   fmon = 0;
 	   fobj = 0;
-	   }
+
 /*--------------------------------------------------------------------*/
 #ifndef NOWORM
 	bwrite(fd,(char *) wsegs,sizeof(wsegs));
