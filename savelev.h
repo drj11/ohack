@@ -89,8 +89,7 @@ saveobjchn(int fd, FILE *log, struct obj *otmp)
 		xl = otmp->onamelth;
 		bwrite(fd, &xl, sizeof xl);
 		bwrite(fd, otmp, xl + sizeof *otmp);
-/*		if (!ismklev) */
-			free((char *) otmp);
+		free(otmp);
 		otmp = otmp2;
 	}
         xl = -1;
