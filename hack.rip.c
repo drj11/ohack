@@ -1,15 +1,10 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1984. */
 
-#include	<sys/types.h>		/* for time_t */
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
+
 #include "hack.h"
-#ifdef BSD
-#include	<sys/time.h>
-#else
-#include	<time.h>
-#endif
 
 extern char plname[];
 
