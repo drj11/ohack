@@ -60,7 +60,7 @@ outrip(){
 		buf[i0] = 0;
 	}
 	center(9, buf);
-	(void) sprintf(buf, "19%2d", lt->tm_year);
+	(void) sprintf(buf, "%4d", 1900 + lt->tm_year);
 	center(11, buf);
 	for(y=8; *dp; y++,dp++){
 		x = 0;
