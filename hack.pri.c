@@ -364,7 +364,6 @@ register x,y;
 	}
 }
 
-#ifndef QUEST
 prl1(x,y)
 register x,y;
 {
@@ -408,7 +407,6 @@ register x,y;
 		nosee(x+1,y);
 	}
 }
-#endif
 
 vism_at(x,y) register x,y; {
 register struct monst *mtmp;

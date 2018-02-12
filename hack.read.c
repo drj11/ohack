@@ -220,15 +220,9 @@ doread() {
 		if(confused)
 			level_tele();
 		else {
-#ifdef QUEST
-			register int oux = u.ux, ouy = u.uy;
-			tele();
-			if(dist(oux, ouy) > 100) known = TRUE;
-#else
 			register int uroom = inroom(u.ux, u.uy);
 			tele();
 			if(uroom != inroom(u.ux, u.uy)) known = TRUE;
-#endif
 		}
 		break;
 	case SCR_GOLD_DETECTION:
@@ -331,10 +325,7 @@ doread() {
 					lev->scrsym = '+';
 					/* do sth in doors ? */
 				} else if(lev->seen) continue;
-#ifndef QUEST
-				if(num != ROOM)
-#endif
-				{
+				if(num != ROOM) {
 				  lev->seen = lev->new = 1;
 				  if(lev->scrsym == ' ')
 				    newsym(zx,zy);
@@ -442,10 +433,6 @@ register boolean on;
 			pline("Nothing Happens");
 			return;
 		}
-#ifdef QUEST
-		pline("The cave lights up around you, then fades.");
-		return;
-#else
 		if(levl[u.ux][u.uy].typ == CORR) {
 		    pline("The corridor lights up around you, then fades.");
 		    return;
@@ -454,13 +441,9 @@ register boolean on;
 		    return;
 		} else
 		    pline("The room is lit.");
-#endif
 	}
 
 do_it:
-#ifdef QUEST
-	return;
-#else
 	if(levl[u.ux][u.uy].lit == on)
 		return;
 	if(levl[u.ux][u.uy].typ == DOOR) {
@@ -489,5 +472,4 @@ do_it:
 				if(on) prl(zx,zy); else nosee(zx,zy);
 		}
 	if(!on) seehx = 0;
-#endif
 }

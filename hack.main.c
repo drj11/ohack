@@ -272,19 +272,13 @@ char *argv[];
 		}
 		flags.move = 1;
 		find_ac();
-#ifndef QUEST
-		if(!flags.mv || Blind)
-#endif
-		{
+		if(!flags.mv || Blind) {
 			seeobjs();
 			seemons();
 			nscr();
 		}
 		if(flags.botl || flags.botlx) bot();
 		if(multi > 0) {
-#ifdef QUEST
-			if(flags.run >= 4) finddir();
-#endif
 			lookaround();
 			if(!multi) {	/* lookaround may clear multi */
 				flags.move = 0;
@@ -386,11 +380,7 @@ register int c,ct;
 	}
 	plname[ct] = 0;
 	if(ct == 0) askname();
-#ifdef QUEST
-	else printf("Hello %s, welcome to quest!\n", plname);
-#else
 	else printf("Hello %s, welcome to hack!\n", plname);
-#endif
 }
 
 impossible(){

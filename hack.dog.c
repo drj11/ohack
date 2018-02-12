@@ -207,7 +207,6 @@ int info[9];
 		if(dogroom < 0 || dogroom == uroom){
 			gx = u.ux;
 			gy = u.uy;
-#ifndef QUEST
 		} else {
 			int tmp = rooms[dogroom].fdoor;
 			    cnt = rooms[dogroom].doorct;
@@ -226,7 +225,6 @@ int info[9];
 				gx = u.ux;
 				gy = u.uy;
 			}
- #endif
 		}
 		appr = (udist >= 9) ? 1 : (mtmp->mflee) ? -1 : 0;
 		if(after && udist <= 4 && gx == u.ux && gy == u.uy)
@@ -362,15 +360,13 @@ newdogpos:
 
 /* return roomnumber or -1 */
 inroom(x,y) xchar x,y; {
-#ifndef QUEST
-	register struct mkroom *croom = &rooms[0];
+	struct mkroom *croom = &rooms[0];
 	while(croom->hx >= 0){
 		if(croom->hx >= x-1 && croom->lx <= x+1 &&
 		   croom->hy >= y-1 && croom->ly <= y+1)
 			return(croom - rooms);
 		croom++;
 	}
-#endif
 	return(-1);	/* not in room or on door */
 }
 

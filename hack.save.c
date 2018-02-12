@@ -121,9 +121,7 @@ register fd;
 			uball = otmp;
 		}
 	}
-#ifndef QUEST
 	setsee();  /* only to recompute seelx etc. - these weren't saved */
-#endif
 	docrt();
 }
 

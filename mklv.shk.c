@@ -1,6 +1,5 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1984. */
 
-#ifndef QUEST
 #include "mklev.h"
 #include "def.eshk.h"
 #define	ESHK	((struct eshk *)(&(shk->mextra[0])))
@@ -131,4 +130,3 @@ dist2(x0,y0,x1,y1){
 sq(a) int a; {
 	return(a*a);
 }
-#endif

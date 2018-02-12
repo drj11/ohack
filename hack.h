@@ -54,10 +54,6 @@ struct prop {
 struct you {
 	xchar ux, uy;
 	schar dx, dy;		/* direction of fast move */
-#ifdef QUEST
-	schar di;		/* direction of FF */
-	xchar ux0, uy0;		/* initial position FF */
-#endif
 	xchar udisx, udisy;	/* last display pos */
 	char usym;		/* usually '@' */
 	schar uluck;
@@ -65,9 +61,6 @@ struct you {
 				/* +: turn right, -: turn left */
 	unsigned udispl:1;	/* @ on display */
 	unsigned ulevel:5;
-#ifdef QUEST
-	unsigned uhorizon:7;
-#endif
 	unsigned utrap:3;	/* trap timeout */
 	unsigned utraptype:1;	/* defined if utrap nonzero */
 #define	TT_BEARTRAP	0

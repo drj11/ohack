@@ -34,11 +34,7 @@ typedef struct {
 #define	CORR 7
 #define	ROOM 8
 #define	STAIRS 9
-#ifdef QUEST
-#define	CORR_SYM	':'
-#else
 #define	CORR_SYM	'#'
-#endif
 
 #define	ERRCHAR	'{'
 
@@ -55,7 +51,6 @@ struct rm {
 };
 extern struct rm levl[COLNO][ROWNO];
 
-#ifndef QUEST
 struct mkroom {
 	xchar lx,hx,ly,hy;
 	schar rtype,rlit,doorct,fdoor;
@@ -64,7 +59,6 @@ struct mkroom {
 extern struct mkroom rooms[MAXNROFROOMS+1];
 #define	DOORMAX	100
 extern coord doors[DOORMAX];
-#endif
 
 
 #include	"def.permonst.h"

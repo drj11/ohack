@@ -28,20 +28,20 @@ unsee() {
 		newsym(u.udisx, u.udisy);
 	}
 */
-#ifndef QUEST
-	if(seehx){
+
+	if(seehx) {
 		seehx = 0;
-	} else
-#endif
-	for(x = u.ux-1; x < u.ux+2; x++)
-	  for(y = u.uy-1; y < u.uy+2; y++) {
-		lev = &levl[x][y];
-		if(!lev->lit && lev->scrsym == '.') {
-			lev->scrsym =' ';
-			lev->new = 1;
-			on_scr(x,y);
-		}
-	}
+	} else {
+                for(x = u.ux-1; x < u.ux+2; x++)
+                  for(y = u.uy-1; y < u.uy+2; y++) {
+                        lev = &levl[x][y];
+                        if(!lev->lit && lev->scrsym == '.') {
+                                lev->scrsym =' ';
+                                lev->new = 1;
+                                on_scr(x,y);
+                        }
+                  }
+        }
 }
 
 /* called:
@@ -52,21 +52,20 @@ unsee() {
 	in hack.do.c:  seeoff(1) - go up or down the stairs
 	in hack.trap.c:seeoff(1) - fall through trapdoor
  */
-seeoff(mode)	/* 1 to redo @, 0 to leave them */
+void
+seeoff(int mode)	/* 1 to redo @, 0 to leave them */
 {	/* 1 means misc movement, 0 means blindness */
-	register x,y;
-	register struct rm *lev;
+	int x,y;
+	struct rm *lev;
 
 	if(u.udispl && mode){
 		u.udispl = 0;
 		levl[u.udisx][u.udisy].scrsym = news0(u.udisx,u.udisy);
 	}
-#ifndef QUEST
+
 	if(seehx) {
 		seehx = 0;
-	} else
-#endif
-	if(!mode) {
+	} else if(!mode) {
 		for(x = u.ux-1; x < u.ux+2; x++)
 			for(y = u.uy-1; y < u.uy+2; y++) {
 				lev = &levl[x][y];
@@ -111,44 +110,11 @@ confdir()
 	u.dy = ydir[x];
 }
 
-#ifdef QUEST
-finddir(){
-register int i, ui = u.di;
-	for(i = 0; i <= 8; i++){
-		if(flags.run & 1) ui++; else ui += 7;
-		ui %= 8;
-		if(i == 8){
-			pline("Not near a wall.");
-			flags.move = multi = 0;
-			return(0);
-		}
-		if(!isroom(u.ux+xdir[ui], u.uy+ydir[ui]))
-			break;
-	}
-	for(i = 0; i <= 8; i++){
-		if(flags.run & 1) ui += 7; else ui++;
-		ui %= 8;
-		if(i == 8){
-			pline("Not near a room.");
-			flags.move = multi = 0;
-			return(0);
-		}
-		if(isroom(u.ux+xdir[ui], u.uy+ydir[ui]))
-			break;
-	}
-	u.di = ui;
-	u.dx = xdir[ui];
-	u.dy = ydir[ui];
-}
 
-isroom(x,y)  register x,y; {
-	return(isok(x,y) && (levl[x][y].typ == ROOM ||
-				(levl[x][y].typ >= LDOOR && flags.run >= 6)));
-}
-#endif
-
-isok(x,y) register x,y; {
-	return(x >= 0 && x <= COLNO-1 && y >= 0 && y <= ROWNO-1);
+int
+isok(int x, int y)
+{
+	return x >= 0 && x <= COLNO-1 && y >= 0 && y <= ROWNO-1;
 }
 
 domove()
@@ -415,9 +381,6 @@ nomon:
 	}
 */
 	if(!Blind) {
-#ifdef QUEST
-		setsee();
-#else
 		if(ust->lit) {
 			if(tmpr->lit) {
 				if(tmpr->typ == DOOR) prl1(u.ux+u.dx,u.uy+u.dy);
@@ -442,7 +405,6 @@ nomon:
 			}
  nose1(oldx-u.dx,oldy-u.dy);
 		}
- #endif
 	} else {
  pru();
 	}
@@ -593,9 +555,6 @@ register struct monst *mtmp;
 #endif
 	if(Blind || flags.run == 0) return;
 	if(flags.run == 1 && levl[u.ux][u.uy].typ >= ROOM) return;
-#ifdef QUEST
-	if(u.ux0 == u.ux+u.dx && u.uy0 == u.uy+u.dy) goto stop;
-#endif
 	for(x = u.ux-1; x <= u.ux+1; x++) for(y = u.uy-1; y <= u.uy+1; y++){
 		if(x == u.ux && y == u.uy) continue;
 		if(!levl[x][y].typ) continue;
@@ -643,9 +602,6 @@ register struct monst *mtmp;
 			return;
 		}
 	}
-#ifdef QUEST
-	if(corrct > 0 && (flags.run == 4 || flags.run == 5)) goto stop;
-#endif
 	if(corrct > 1 && flags.run == 2) goto stop;
 	if((flags.run == 1 || flags.run == 3) && !noturn && !m0 && i0 &&
 		(corrct == 1 || (corrct == 2 && i0 == 1))) {
@@ -676,46 +632,6 @@ register struct monst *mtmp;
 	}
 }
 
-#ifdef QUEST
-cansee(x,y) xchar x,y; {
-register int dx,dy,adx,ady,sdx,sdy,dmax,d;
-	if(Blind) return(0);
-	if(!isok(x,y)) return(0);
-	d = dist(x,y);
-	if(d < 3) return(1);
-	if(d > u.uhorizon*u.uhorizon) return(0);
-	if(!levl[x][y].lit)
-		return(0);
-	dx = x - u.ux;	adx = abs(dx);	sdx = sgn(dx);
-	dy = y - u.uy;  ady = abs(dy);	sdy = sgn(dy);
-	if(dx == 0 || dy == 0 || adx == ady){
-		dmax = (dx == 0) ? ady : adx;
-		for(d = 1; d <= dmax; d++)
-			if(!rroom(sdx*d,sdy*d))
-				return(0);
-		return(1);
-	} else if(ady > adx){
-		for(d = 1; d <= ady; d++){
-			if(!rroom(sdx*( (d*adx)/ady ), sdy*d) ||
-			   !rroom(sdx*( (d*adx-1)/ady+1 ), sdy*d))
-				return(0);
-		}
- return(1);
-	} else {
-		for(d = 1; d <= adx; d++){
-			if(!rroom(sdx*d, sdy*( (d*ady)/adx )) ||
-			   !rroom(sdx*d, sdy*( (d*ady-1)/adx+1 )))
-				return(0);
-		}
- return(1);
-	}
-}
-
-rroom(x,y) register int x,y; {
-	return(levl[u.ux+x][u.uy+y].typ >= ROOM);
-}
-
-#else
 
 cansee(x,y) xchar x,y; {
 	if(Blind || u.uswallow) return(0);
@@ -724,9 +640,9 @@ cansee(x,y) xchar x,y; {
 		y <= seehy) return(1);
 	return(0);
 }
-#endif
 
-sgn(a) register int a; {
+int
+sgn(int a) {
 	return((a> 0) ? 1 : (a == 0) ? 0 : -1);
 }
 
@@ -736,23 +652,6 @@ register unsigned num;
 	return(1 << num);
 }
 
-#ifdef QUEST
-setsee()
-{
-	register x,y;
-
-	if(Blind) {
-		pru();
-		return;
-	}
-	for(y = u.uy-u.uhorizon; y <= u.uy+u.uhorizon; y++)
-		for(x = u.ux-u.uhorizon; x <= u.ux+u.uhorizon; x++) {
-			if(cansee(x,y))
-				prl(x,y);
-	}
-}
-
-#else
 
 setsee()
 {
@@ -785,7 +684,6 @@ setsee()
 	    if(seehx == u.ux) for(y = u.uy-1; y <= u.uy+1; y++) prl(seehx+1,y);
 	}
 }
-#endif
 
 nomul(nval)
 register nval;

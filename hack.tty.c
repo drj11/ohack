@@ -178,9 +178,6 @@ parse()
 	}
 	if(foo == 'f' || foo == 'F'){
 		inpline[1] = getchar();
-#ifdef QUEST
-		if(inpline[1] == foo) inpline[2] = getchar(); else
-#endif
 		inpline[2] = 0;
 	}
 	if(foo == 'm' || foo == 'M'){

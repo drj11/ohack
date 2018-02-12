@@ -4,26 +4,7 @@
 #include <string.h>
 
 #include "hack.h"
-#ifdef QUEST
-int shlevel = 0;
-struct monst *shopkeeper = 0;
-struct obj *billobjs = 0;
-obfree(obj,merge) register struct obj *obj, *merge; {
-	free((char *) obj);
-}
-inshop(){ return(0); }
-addtobill(){}
-subfrombill(){}
-splitbill(){}
-dopay(){}
-paybill(){}
-doinvbill(){}
-shkdead(){}
-shk_move(){ return(0); }
-setshk(){}
-char *shkname(){ return(""); }
 
-#else
 #include	"hack.mfndpos.h"
 #include	"def.eshk.h"
 
@@ -638,7 +619,6 @@ int info[9];
 	}
  return(0);
 }
-#endif
 
 char *
 plur(n) unsigned n; {

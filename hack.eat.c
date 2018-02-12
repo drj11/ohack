@@ -161,13 +161,6 @@ doeat(){
 			else
 			pline("That %s was delicious!",ftmp->oc_name);
 			lesshungry(ftmp->nutrition);
-#ifdef QUEST
-			if(otmp->otyp == CARROT && !Blind){
-				u.uhorizon++;
-				setsee();
-				pline("Your vision improves.");
-			}
-#endif
 			if(otmp->otyp == FORTUNE_COOKIE) {
 			  if(Blind) {
 			    pline("This cookie has a scrap of paper inside!");
@@ -314,9 +307,6 @@ register tp = 0;
 		Invis += 50;
 		/* fall into next case */
 	case 'y':
-#ifdef QUEST
-		u.uhorizon++;
-#endif
 		/* fall into next case */
 	case 'B':
 		Confusion = 50;

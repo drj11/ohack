@@ -1,14 +1,6 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1984. */
 
 #include	"hack.h"
-#ifdef QUEST
-setgd(/* mtmp */) /* struct monst *mtmp; */ {}
-gd_move() { return(2); }
-gddead(mtmp) struct monst *mtmp; {}
-invault(){}
-
-#else
-
 
 extern struct monst *makemon();
 #define	VAULT	6
@@ -210,6 +202,3 @@ newpos:
 gddead(){
 	guard = 0;
 }
-
-
-#endif

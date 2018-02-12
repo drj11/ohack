@@ -4,11 +4,7 @@
 
 doversion(){
 	pline("%s 1.0.1 - last edit %s.",
-#ifdef QUEST
-		"Quest"
-#else
 		"Hack"
-#endif
 	, datestring);
 	return(0);
 }

@@ -307,13 +307,6 @@ register char *cmd;
 			u.last_str_turn = 0;
 		}
 		flags.mv = 1;
-#ifdef QUEST
-		if(flags.run >= 4) finddir();
-		if(firsttime){
-			u.ux0 = u.ux + u.dx;
-			u.uy0 = u.uy + u.dy;
-		}
-#endif
 		domove();
 		return;
 	}
@@ -336,14 +329,6 @@ register char *cmd;
 		flags.nopick = 1;
 		goto rush;
 	}
-#ifdef QUEST
-	if(*cmd == cmd[1] && (*cmd == 'f' || *cmd == 'F')) {
-		flags.run = 4;
-		if(*cmd == 'F') flags.run += 2;
-		if(cmd[2] == '-') flags.run += 1;
-		goto rush;
-	}
-#endif
 	while(tlist->f_char) {
 		if(*cmd == tlist->f_char){
 			res = (*(tlist->f_funct))(0);

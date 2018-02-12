@@ -140,9 +140,6 @@ got_suffix:
 	init_uhunger();
 	u.uhpmax = u.uhp = 12;
 	u.ustrmax = u.ustr = !rn2(20) ? 14 + rn2(7) : 16;
-#ifdef QUEST
-	u.uhorizon = 6;
-#endif
 	switch(pc) {
 	case 'C':
 		setpl_char("Cave-man");

@@ -10,10 +10,10 @@ boolean wizard;			/* TRUE when called as  hack -w */
 #endif
 
 struct rm levl[COLNO][ROWNO];	/* level map */
-#ifndef QUEST
+
 struct mkroom rooms[MAXNROFROOMS+1];
 coord doors[DOORMAX];
-#endif
+
 struct monst *fmon = 0;
 struct gen *fgold = 0, *ftrap = 0;
 struct obj *fobj = 0, *fcobj = 0, *invent = 0, *uwep = 0, *uarm = 0,
