@@ -18,16 +18,11 @@ extern boolean hmon();
 	2. when teleporting
 	3. when walking out of a lit room
  */
-unsee() {
-	register x,y;
-	register struct rm *lev;
-
-/*
-	if(u.udispl){
-		u.udispl = 0;
-		newsym(u.udisx, u.udisy);
-	}
-*/
+void
+unsee(void)
+{
+	int x,y;
+	struct rm *lev;
 
 	if(seehx) {
 		seehx = 0;
@@ -80,14 +75,14 @@ char sdir[] = "hykulnjb";
 schar xdir[8] = { -1,-1,0,1,1,1,0,-1 };
 schar ydir[8] = { 0,-1,-1,-1,0,1,1,1 };
 
-movecm(cmd)
-register char *cmd;
+int
+movecm(register char *cmd)
 {
-register char *dp;
-		if(!(dp = index(sdir, *cmd))) return(0);
-		u.dx = xdir[dp-sdir];
-		u.dy = ydir[dp-sdir];
-		return(1);
+        char *dp;
+        if(!(dp = index(sdir, *cmd))) return(0);
+        u.dx = xdir[dp-sdir];
+        u.dy = ydir[dp-sdir];
+        return 1;
 }
 
 getdir()
@@ -374,12 +369,6 @@ nomon:
 		(xdnstair == u.ux && ydnstair == u.uy))
 			nomul(0);
 	}
-/*
-	if(u.udispl) {
-		u.udispl = 0;
-		newsym(oldx,oldy);
-	}
-*/
 	if(!Blind) {
 		if(ust->lit) {
 			if(tmpr->lit) {
@@ -546,13 +535,12 @@ register int wt;
 /* turn around a corner if that is the only way we can proceed */
 /* do not turn left or right twice */
 lookaround(){
-register x,y,i,x0,y0,m0,i0 = 9;
-register int corrct = 0, noturn = 0;
-register struct monst *mtmp;
-#ifdef lint
+        int x,y,i,x0,y0,m0,i0 = 9;
+        int corrct = 0, noturn = 0;
+        struct monst *mtmp;
 	/* suppress "used before set" message */
 	x0 = y0 = 0;
-#endif
+
 	if(Blind || flags.run == 0) return;
 	if(flags.run == 1 && levl[u.ux][u.uy].typ >= ROOM) return;
 	for(x = u.ux-1; x <= u.ux+1; x++) for(y = u.uy-1; y <= u.uy+1; y++){
@@ -646,8 +634,9 @@ sgn(int a) {
 	return((a> 0) ? 1 : (a == 0) ? 0 : -1);
 }
 
-pow2(num) /* returns 2 to the num */
-register unsigned num;
+/* returns 2 to the num */
+int
+pow2(unsigned num)
 {
 	return(1 << num);
 }
@@ -776,12 +765,13 @@ register int carrcap = 5*(((u.ustr > 18) ? 20 : u.ustr) + u.ulevel);
  return(wt - carrcap);
 }
 
-inv_cnt(){
-register struct obj *otmp = invent;
-register int ct = 0;
+int
+inv_cnt(void) {
+        struct obj *otmp = invent;
+        int ct = 0;
 	while(otmp){
 		ct++;
 		otmp = otmp->nobj;
 	}
- return(ct);
+        return(ct);
 }
