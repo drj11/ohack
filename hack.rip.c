@@ -15,12 +15,12 @@ static char *rip[] = {
 "                    /      IN      \\",
 "                   /     PEACE      \\",
 "                  /                  \\",
-"                  |                  |",
-"                  |                  |",
-"                  |                  |",
-"                  |                  |",
-"                  |                  |",
-"                  |       1001       |",
+(char[]){"                  |                  |"},
+(char[]){"                  |                  |"},
+(char[]){"                  |                  |"},
+(char[]){"                  |                  |"},
+(char[]){"                  |                  |"},
+(char[]){"                  |       1001       |"},
 "                 *|     *  *  *      | *",
 "        _________)/\\\\_//(\\/(/\\)/\\//\\/|_)_______\n",
 0
@@ -80,7 +80,7 @@ outrip(){
  getret();
 }
 
-center(line, text) int line; char *text; {
+center(int line, char *text) {
 register char *ip,*op;
 	ip = text;
 	op = &rip[line][28 - ((strlen(text)+1)/2)];
