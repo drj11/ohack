@@ -18,10 +18,10 @@ char *fl[]= {
 
 dozap()
 {
-	register struct obj *obj;
-	register struct monst *mtmp;
+	struct obj *obj;
+	struct monst *mtmp;
 	xchar zx,zy;
-	register num;
+	int num;
 
 	obj = getobj("/", "zap");
 	if(!obj) return(0);
@@ -41,7 +41,7 @@ dozap()
 			switch(obj->otyp) {
 			case WAN_STRIKING:
 				if(rnd(20) < 10+mtmp->data->ac) {
-					register int tmp = d(2,12);
+					int tmp = d(2,12);
 					hit("wand", mtmp, exclam(tmp));
 					mtmp->mhp -= tmp;
 					if(mtmp->mhp < 1) killed(mtmp);
@@ -182,7 +182,7 @@ dozap()
 			objects[obj->otyp].oc_name_known = 1;
 		}
 	}
- return(1);
+        return(1);
 }
 
 char *
