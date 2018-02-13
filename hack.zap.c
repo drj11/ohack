@@ -5,11 +5,12 @@
 #include "hack.h"
 
 extern struct monst *makemon();
-struct monst *bhit();
-char *exclam();
-
+struct monst *bhit(int ddx, int ddy, int range, char sym);
+char *exclam(int force);
 void buzz(int, xchar, xchar, int, int);
 int zhit(struct monst *, int);
+void hit(char *, struct monst *, char *);
+void miss(char *, struct monst *);
 
 char *fl[]= {
 	"magic missile",
@@ -191,8 +192,7 @@ dozap(void)
 }
 
 char *
-exclam(force)
-register int force;
+exclam(int force)
 {
 	/* force == 0 occurs e.g. with sleep ray */
 	/* note that large force is usual with wands so that !! would
@@ -200,18 +200,16 @@ register int force;
 	return( (force < 0) ? "?" : (force <= 4) ? "." : "!" );
 }
 
-hit(str,mtmp,force)
-register char *str;
-register struct monst *mtmp;
-register char *force;		/* usually either "." or "!" */
+void
+hit(char *str, struct monst *mtmp, char *force)
+/* force is usually either "." or "!" */
 {
 	if(!cansee(mtmp->mx,mtmp->my)) pline("The %s hits it.", str);
 	else pline("The %s hits %s%s", str, monnam(mtmp), force);
 }
 
-miss(str,mtmp)
-register char *str;
-register struct monst *mtmp;
+void
+miss(char *str, struct monst *mtmp)
 {
 	if(!cansee(mtmp->mx,mtmp->my)) pline("The %s misses it.",str);
 	else pline("The %s misses %s.",str,monnam(mtmp));
@@ -222,9 +220,7 @@ register struct monst *mtmp;
 
 /* check !u.uswallow before calling bhit() */
 struct monst *
-bhit(ddx,ddy,range,sym)
-register ddx,ddy,range;
-char sym;
+bhit(int ddx, int ddy, int range, char sym)
 {
 	register struct monst *mtmp;
 
@@ -253,9 +249,10 @@ char sym;
 struct monst boomcaught;
 
 struct monst *
-boomhit(dx,dy) {
-	register int i, ct;
-	register struct monst *mtmp;
+boomhit(int dx, int dy)
+{
+	int i, ct;
+	struct monst *mtmp;
 	char sym = ')';
 	extern schar xdir[], ydir[];
 
@@ -299,7 +296,8 @@ boomhit(dx,dy) {
 }
 
 char
-dirlet(dx,dy) register dx,dy; {
+dirlet(int dx, int dy)
+{
 	return
 		(dx == dy) ? '\\' : (dx && dy) ? '/' : dx ? '-' : '|';
 }
