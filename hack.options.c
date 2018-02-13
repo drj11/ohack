@@ -8,9 +8,11 @@
 #include "hack.h"
 extern char *eos();
 
+void parseoptions(char *, boolean);
+
 initoptions()
 {
-	register char *opts;
+	char *opts;
 	extern char *getenv();
 
 	flags.time = flags.nonews = flags.notombstone = flags.end_own =
@@ -23,11 +25,10 @@ initoptions()
 		parseoptions(opts,TRUE);
 }
 
-parseoptions(opts, from_env)
-register char *opts;
-boolean from_env;
+void
+parseoptions(char *opts, boolean from_env)
 {
-	register char *op,*op2;
+	char *op,*op2;
 	unsigned num;
 	boolean negated;
 
