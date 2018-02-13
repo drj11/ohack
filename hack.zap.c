@@ -8,6 +8,9 @@ extern struct monst *makemon();
 struct monst *bhit();
 char *exclam();
 
+void buzz(int, xchar, xchar, int, int);
+int zhit(struct monst *, int);
+
 char *fl[]= {
 	"magic missile",
 	"bolt of fire",
@@ -16,7 +19,8 @@ char *fl[]= {
 	"death ray"
 };
 
-dozap()
+int
+dozap(void)
 {
 	struct obj *obj;
 	struct monst *mtmp;
@@ -93,15 +97,16 @@ dozap()
 			if(!findit()) return(1);
 			break;
 		case WAN_CREATE_MONSTER:
-			{ register int cnt = 1;
-			if(!rn2(23)) cnt += rn2(7) + 1;
-			while(cnt--)
-			    (void) makemon((struct permonst *) 0, u.ux, u.uy);
+			{
+                                int cnt = 1;
+			        if(!rn2(23)) cnt += rn2(7) + 1;
+			        while(cnt--)
+			                (void) makemon((struct permonst *) 0, u.ux, u.uy);
 			}
 			break;
 		case WAN_WISHING:
 			{ char buf[BUFSZ];
-			  register struct obj *otmp;
+			  struct obj *otmp;
 			  extern struct obj *readobjnam(), *addinv();
 		      if(u.uluck + rn2(5) < 0) {
 			pline("Unfortunately, nothing happens.");
@@ -115,8 +120,8 @@ dozap()
 		      break;
 			}
 		case WAN_DIGGING:
-			{ register struct rm *room;
-			  register int digdepth;
+			{ struct rm *room;
+			  int digdepth;
 			if(u.uswallow) {
 				pline("You pierce %s's stomach wall!",
 					monnam(u.ustuck));
@@ -173,7 +178,7 @@ dozap()
 			break;
 			}
 		default:
-			buzz((int) obj->otyp - WAN_MAGIC_MISSILE,
+			buzz(obj->otyp - WAN_MAGIC_MISSILE,
 				u.ux, u.uy, u.dx, u.dy);
 			break;
 		}
@@ -300,21 +305,17 @@ dirlet(dx,dy) register dx,dy; {
 }
 
 /* type < 0: monster spitting fire at you */
-buzz(type,sx,sy,dx,dy)
-register int type;
-register xchar sx,sy;
-register int dx,dy;
+void
+buzz(int type, xchar sx, xchar sy, int dx, int dy)
 {
-	register char *fltxt = (type < 0) ? "blaze of fire" : fl[type];
+	char *fltxt = (type < 0) ? "blaze of fire" : fl[type];
 	struct rm *lev;
 	xchar range;
 	struct monst *mon;
 
 	if(u.uswallow) {
-		register int tmp;
-
 		if(type < 0) return;
-		tmp = zhit(u.ustuck, type);
+		int tmp = zhit(u.ustuck, type);
 		pline("The %s rips into %s%s",
 			fltxt, monnam(u.ustuck), exclam(tmp));
 		return;
@@ -354,7 +355,7 @@ register int dx,dy;
 		   (type >= 0 || mon->data->mlet != 'D')) {
 			wakeup(mon);
 			if(rnd(20) < 18 + mon->data->ac) {
-				register int tmp = zhit(mon,type);
+				int tmp = zhit(mon,type);
 				if(mon->mhp < 1) {
 					if(type < 0) {
 					    if(cansee(mon->mx,mon->my))
@@ -435,14 +436,14 @@ register int dx,dy;
 			}
 		}
 	}
- Tmp_at(-1,-1);
+        Tmp_at(-1,-1);
 }
 
-zhit(mon,type)			/* returns damage to mon */
-register struct monst *mon;
-register type;
+/* returns damage to mon */
+int
+zhit(struct monst *mon, int type)
 {
-	register int tmp = 0;
+	int tmp = 0;
 
 	switch(type) {
 	case 0:			/* magic missile */

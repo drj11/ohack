@@ -28,8 +28,8 @@ struct monst *
 makemon(ptr,x,y)
 register struct permonst *ptr;
 {
-	register struct monst *mtmp;
-	register tmp, ct;
+	struct monst *mtmp;
+	int tmp, ct;
 	boolean anything = (!ptr);
 
 	if(x != 0 || y != 0) if(m_at(x,y)) return((struct monst *) 0);
