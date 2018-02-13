@@ -76,14 +76,17 @@ register x,y;
 	(-2,let)-change let
 */
 
-tmp_at(x,y) schar x,y; {
-static schar prevx, prevy;
-static char let;
-	if((int)x == -2){	/* change let call */
+void
+tmp_at(schar x, schar y)
+{
+        static schar prevx, prevy;
+        static char let;
+
+	if(x == -2) {   /* change let call */
 		let = y;
 		return;
 	}
-	if((int)x == -1 && (int)y >= 0){	/* open or close call */
+	if(x == -1 && y >= 0) {	/* open or close call */
 		let = y;
 		prevx = -1;
 		return;
@@ -104,12 +107,14 @@ static char let;
 }
 
 /* like the previous, but the symbols are first erased on completion */
-Tmp_at(x,y) schar x,y; {
-static char let;
-static xchar cnt;
-static coord tc[COLNO];		/* but watch reflecting beams! */
-register xx,yy;
-	if((int)x == -1) {
+void
+Tmp_at(schar x, schar y)
+{
+        static char let;
+        static xchar cnt;
+        static coord tc[COLNO];         /* but watch reflecting beams! */
+        int xx,yy;
+	if(x == -1) {
 		if(y > 0) {	/* open call */
 			let = y;
 			cnt = 0;
@@ -125,7 +130,7 @@ register xx,yy;
 		cnt = let = 0;	/* superfluous */
 		return;
 	}
-	if((int)x == -2) {	/* change let call */
+	if(x == -2) {	/* change let call */
 		let = y;
 		return;
 	}
@@ -140,9 +145,8 @@ register xx,yy;
 	}
 }
 
-at(x,y,ch)
-register xchar x,y;
-char ch;
+void
+at(xchar x, xchar y, char ch)
 {
 #ifndef lint
 	/* if xchar is unsigned, lint will complain about  if(x < 0)  */

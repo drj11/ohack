@@ -128,6 +128,7 @@ extern long moves;
 extern int multi;
 
 int pow2(unsigned);
+void at(xchar, xchar, char);
 
 
 extern char lock[];
