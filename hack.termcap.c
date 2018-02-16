@@ -8,10 +8,9 @@
 
 #include "config.h"	/* for ROWNO and COLNO */
 
-extern char *tgetstr(), *tgoto(), *getenv();
+extern char *tgetstr(), *tgoto();
 extern long *alloc();
 
-short ospeed;		/* terminal baudrate; used by tputs */
 char tbuf[512];
 char *HO, *CL, *CE, *UP, *CM, *ND, *XD, *BC, *SO, *SE;
 char PC = '\0';
