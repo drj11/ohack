@@ -113,7 +113,6 @@ Tmp_at(schar x, schar y)
         static char let;
         static xchar cnt;
         static coord tc[COLNO];         /* but watch reflecting beams! */
-        int xx,yy;
 	if(x == -1) {
 		if(y > 0) {	/* open call */
 			let = y;
@@ -122,8 +121,8 @@ Tmp_at(schar x, schar y)
 		}
 		/* close call (do not distinguish y==0 and y==-1) */
 		while(cnt--) {
-			xx = tc[cnt].x;
-			yy = tc[cnt].y;
+			int xx = tc[cnt].x;
+			int yy = tc[cnt].y;
 			prl(xx, yy);
 			at(xx, yy, levl[xx][yy].scrsym);
 		}

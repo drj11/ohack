@@ -59,19 +59,23 @@ startup()
 /* Cursor movements */
 extern xchar curx, cury;
 
-curs(x,y)
-register int x,y;	/* not xchar: perhaps xchar is unsigned and
-			   curx-x would be unsigned as well */
+int
+curs(int x, int y)
 {
 
-	if (y == cury && x == curx) return;
-	if(abs(cury-y)<= 3 && abs(curx-x)<= 3) nocmov(x,y);
+	if (y == cury && x == curx)
+                return;
+	if(abs(cury-y)<= 3 && abs(curx-x)<= 3)
+                nocmov(x,y);
 	else if((x <= 3 && abs(cury-y)<= 3) || (!CM && x<abs(curx-x))) {
 		(void) putchar('\r');
 		curx = 1;
 		nocmov(x,y);
-	} else if(!CM) nocmov(x,y);
- else cmov(x,y);
+	} else if(!CM) {
+                nocmov(x,y);
+        } else {
+                cmov(x,y);
+        }
 }
 
 nocmov(x,y)
