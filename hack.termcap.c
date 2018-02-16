@@ -3,7 +3,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+
+#include <time.h>
+
 #include "config.h"	/* for ROWNO and COLNO */
+
 extern char *tgetstr(), *tgoto(), *getenv();
 extern long *alloc();
 
@@ -173,6 +177,7 @@ bell()
 }
 
 delay_output() {
-	/* delay 40 ms - could also use a 'nap'-system call */
-	tputs("40", 1, xputc);
+	/* delay 40 ms */
+	nanosleep(&(struct timespec){0, 40000000}, NULL);
+	fflush(stdout);
 }
